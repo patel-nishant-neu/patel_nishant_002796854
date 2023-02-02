@@ -10,4 +10,9 @@ package model;
  */
 public class chef {
     
+    String chefFName;
+    String chefLName;
+    String username;
+    String emailID;
+    int phoneNum;
 }

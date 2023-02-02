@@ -4,19 +4,25 @@
  */
 package UI;
 
+import model.chef;
+
 /**
  *
  * @author nishn
  */
-public class blogweb extends javax.swing.JFrame {
+public class viewJPanel extends javax.swing.JFrame {
 
     /**
-     * Creates new form blogweb
+     * Creates new form viewJPanel
      */
-    public blogweb() {
+    private chef Chef;
+    /**
+     * Creates new form CreateJPanel
+     */
+    public viewJPanel(chef Chef) {
         initComponents();
+        this.Chef = Chef;
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,20 +65,20 @@ public class blogweb extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(blogweb.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(blogweb.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(blogweb.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(blogweb.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(viewJPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new blogweb().setVisible(true);
+                new viewJPanel().setVisible(true);
             }
         });
     }
