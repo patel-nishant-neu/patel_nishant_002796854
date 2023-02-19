@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author shalomdaniel
+ * @author nishn 
  */
 public class ApplicantCatalog {
 
@@ -76,9 +76,9 @@ public class ApplicantCatalog {
           return null;
     }
     
-    public Applicant searchApplicantByName(String petname){
+    public Applicant searchApplicantByName(String name){
           for(Applicant app: this.applicants){
-              if(app.getPet().getPet_name().equals(petname)){
+              if(app.getOwner_firstname().equals(name)){
                   return app;
               }
           }

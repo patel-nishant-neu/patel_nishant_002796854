@@ -7,7 +7,7 @@ package Model;
 
 /**
  *
- * @author shalomdaniel
+ * @author nishn
  */
 public class Pet {
 

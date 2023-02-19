@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author shalomdaniel
+ * @author nishn 
  */
 public class PlanDetail {
 
