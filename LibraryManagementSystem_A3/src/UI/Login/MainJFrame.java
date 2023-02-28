@@ -1,22 +1,46 @@
+package Ui.Login;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package UI.Login;
+import Branch.Branch;
+import AppSys.Business;
+import Role.Role;
+import Branch.UserAccount;
+import Branch.UserAccountDirectory;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author narot
+ * @author Nidhi Raghavendra
  */
 public class MainJFrame extends javax.swing.JFrame {
 
+    private Business business;
+    private Branch branch;
+    private UserAccountDirectory useraccountDirectory;
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
+        this.business = Business.getInstance();
+        this.useraccountDirectory = business.getBranch().getBranchuseraccountDirectory();
+        this.branch = business.getBranch();
+        
+        populateDropdown();
     }
 
+    public MainJFrame(Business business, UserAccount useraccount) {
+        initComponents();
+        this.setVisible(true);
+        
+        this.business = business;
+        this.useraccountDirectory = business.getBranch().getBranchuseraccountDirectory();
+        this.branch = business.getBranch();
+        
+        populateDropdown();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +50,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxRole = new javax.swing.JComboBox<>();
         Username = new javax.swing.JTextField();
         Password = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -35,6 +59,11 @@ public class MainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -49,7 +78,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(232, 232, 232)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboBoxRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Username)
                             .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -70,7 +99,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBoxRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
                 .addContainerGap(131, Short.MAX_VALUE))
@@ -79,6 +108,55 @@ public class MainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        String username = Username.getText();
+        String password = Password.getText();
+        String role = (String) comboBoxRole.getSelectedItem();
+
+//        UserAccountDirectory ua = this.applicationSystem.getBranch().getUserAccountDirectory();
+
+        if (this.useraccountDirectory.authenticateUser(username, password, role) != null) {
+            
+            UserAccount user = this.useraccountDirectory.getUserAccount(username, password, role);
+            String branch = user.getBranch();
+            this.setVisible(false);
+            user.getWorkArea(role, business, user, branch);
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid credentials");
+        }
+        
+//        Boolean foundUser = false;
+//        
+//        if(this.business.getTopLevelUserAccountDirectory().authenticateUser(Username.getText(), Username.getText()) != null) {
+//            UserAccount user = this.business.getTopLevelUserAccountDirectory().authenticateUser(Username.getText(), Username.getText());
+//            foundUser = true;
+//            user.getRole().createWorkArea(business, branch, useraccount);
+//            this.setVisible(false);
+//        } else {
+//            for(Branch branch: this.business.getBranches()) {
+//                if(branch.getBranchuseraccountDirectory().authenticateUser(Password.getText(), Password.getText()) != null) {
+//                    UserAccount branchUser = branch.getBranchuseraccountDirectory().authenticateUser(Password.getText(), Password.getText());
+//                    foundUser = true;
+//                    branchUser.getRole().createWorkArea(business, branch, useraccount);
+//                    this.setVisible(false);
+//                }
+//            }
+//        }
+//        // if user not found
+//        if(!foundUser) {
+//            JOptionPane.showMessageDialog(null, "Invalid Credentials");
+//        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+        public void populateDropdown() {
+        comboBoxRole.removeAllItems();
+        
+        for(String rolename: Role.getAllRoles()) {
+            comboBoxRole.addItem(rolename);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -117,8 +195,8 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Password;
     private javax.swing.JTextField Username;
+    private javax.swing.JComboBox<String> comboBoxRole;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

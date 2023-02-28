@@ -7,19 +7,22 @@ package Role;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Ui.Login.MainJFrame;
 import javax.swing.JFrame;
 
 /**
  *
  * @author narot
  */
-public abstract class Role {
-        
-    static String[] roles = {"Branch Manager", "System Admin", "Customer", "Librarian"};
+public class BranchSelection {
     
-    public static String[] getAllRoles() {
-        return roles;
+    public BranchSelection(){
+        
     }
     
-    public abstract JFrame createWorkArea(Business library, UserAccount useraccount);
+    public JFrame getWorkArea(Business business, UserAccount user) {
+        
+        System.out.println("HEREee 2");
+        return new MainJFrame(business, user );
+    }
 }

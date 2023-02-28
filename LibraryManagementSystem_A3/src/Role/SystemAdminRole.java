@@ -4,22 +4,24 @@
  */
 package Role;
 
-import AppSys.Business;
 import Branch.Branch;
+import AppSys.Business;
+import UI.SystemAdmin.SysAdminJFrame;
 import Branch.UserAccount;
 import javax.swing.JFrame;
-
 /**
  *
  * @author narot
  */
-public abstract class Role {
+public class SystemAdminRole extends Role {
+    
+    public SystemAdminRole(){
         
-    static String[] roles = {"Branch Manager", "System Admin", "Customer", "Librarian"};
-    
-    public static String[] getAllRoles() {
-        return roles;
     }
-    
-    public abstract JFrame createWorkArea(Business library, UserAccount useraccount);
+
+
+    @Override
+    public JFrame createWorkArea(Business business, UserAccount useraccount) {
+        return new SysAdminJFrame(business, useraccount);
+    }
 }

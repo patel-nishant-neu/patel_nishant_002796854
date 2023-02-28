@@ -4,18 +4,46 @@
  */
 package UI.SystemAdmin;
 
+import Branch.Branch;
+import AppSys.Business;
+import Role.Role;
+import Branch.UserAccount;
+
 /**
  *
  * @author narot
  */
 public class SysAdminJFrame extends javax.swing.JFrame {
 
+    private Business business;
+    private Branch branch;
+    private UserAccount useraccount;
     /**
      * Creates new form SysAdminJFrame
      */
-    public SysAdminJFrame() {
+    
+    private SysAdminJFrame() {
         initComponents();
     }
+        
+    public SysAdminJFrame(Business business, UserAccount useraccount) {
+        initComponents();
+        this.setVisible(true);
+
+        this.business = business;
+        this.useraccount = useraccount;
+        
+      //  populateDropdown();
+    }
+
+
+
+//    public void populateDropdown() {
+//        jComboBox1.removeAllItems();
+//        for (String rolename : Role.getAllRoles()) {
+//            jComboBox1.addItem(rolename);
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.

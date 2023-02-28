@@ -26,9 +26,19 @@ public class EmployeeDirectory {
         this.employees = employees;
     }
     
-    public Employee createEmployee(String ID, String Exprience, String Designation){
+    public Employee findByID(String ID) {
+        for (Employee e: this.employees){
+            if(e.getPersonID().equals(ID)){
+                return e;
+            }
+        }
+        return null;
+    }
+    
+    public Employee createEmployee(String ID, String name, String Exprience, String Designation){
         Employee employee = new Employee();
-        employee.setEmployeeID(ID);
+        employee.setPersonID(ID);
+        employee.setName(name);
         employee.setExprience(Exprience);
         employee.setDesignation(Designation);
         this.employees.add(employee);

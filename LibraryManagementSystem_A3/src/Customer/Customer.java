@@ -4,10 +4,43 @@
  */
 package Customer;
 
+import Personnel.Person;
+import Services.RentRequest;
+import java.util.ArrayList;
+
 /**
  *
  * @author narot
  */
-public class Customer {
+public class Customer extends Person{
+    
+    private int rentalsTotal;
+    
+    private ArrayList<RentRequest> customerRentalList;
+    
+    public Customer(){
+        super();
+        this.customerRentalList = new ArrayList<RentRequest>();
+    }
+
+    public int getRentalsTotal() {
+        return rentalsTotal;
+    }
+
+    public void setRentalsTotal(int rentalsTotal) {
+        this.rentalsTotal = rentalsTotal;
+    }
+
+    public ArrayList<RentRequest> getCustomerRentalList() {
+        return customerRentalList;
+    }
+
+    public void setCustomerRentalList(ArrayList<RentRequest> customerRentalList) {
+        this.customerRentalList = customerRentalList;
+    }
+    
+    public void addOrder(RentRequest rentrequest){
+        this.customerRentalList.add(rentrequest);
+    }
     
 }

@@ -4,22 +4,21 @@
  */
 package Employee;
 
+import Personnel.Person;
+
 /**
  *
  * @author narot
  */
-public class Employee {
+public class Employee extends Person{
     
-    String EmployeeID;
     String Exprience;
     String Designation;
-
-    public String getEmployeeID() {
-        return EmployeeID;
-    }
-
-    public void setEmployeeID(String EmployeeID) {
-        this.EmployeeID = EmployeeID;
+    
+    public Employee(){
+        super();
+        this.Designation = Designation;
+        this.Exprience = Exprience;
     }
 
     public String getExprience() {
