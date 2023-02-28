@@ -4,17 +4,39 @@
  */
 package UI.SystemAdmin;
 
+import AppSys.Business;
+import Branch.Branch;
+import Branch.UserAccount;
+import Library.Library;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author narot
  */
 public class AddBranchJPanel extends javax.swing.JPanel {
 
+    private Business business;
+    private UserAccount useraccount;
+    private Branch branch;
+    DefaultTableModel tablemodel;
     /**
      * Creates new form AddBranchJPanel
      */
     public AddBranchJPanel() {
         initComponents();
+
+    }
+    public AddBranchJPanel(Business business, UserAccount useraccount){
+        initComponents();
+        this.setVisible(true);
+        
+        this.business = business;
+        this.useraccount = useraccount;
+        this.tablemodel = (DefaultTableModel) jShowBranchTable.getModel();
+        
+        //populateTable();
     }
 
     /**
@@ -29,11 +51,11 @@ public class AddBranchJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        addBranchBtn = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jShowBranchTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -42,11 +64,16 @@ public class AddBranchJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("Enter Branch Name: ");
 
-        jButton1.setText("Add Branch");
+        addBranchBtn.setText("Add Branch");
+        addBranchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBranchBtnActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Enter Location: ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jShowBranchTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -57,7 +84,7 @@ public class AddBranchJPanel extends javax.swing.JPanel {
                 "Branch", "Location"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jShowBranchTable);
 
         jButton2.setText("Delete Branch");
 
@@ -67,7 +94,7 @@ public class AddBranchJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addBranchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(241, 241, 241))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +129,7 @@ public class AddBranchJPanel extends javax.swing.JPanel {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(addBranchBtn)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(66, 66, 66)
@@ -113,15 +140,39 @@ public class AddBranchJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addBranchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBranchBtnActionPerformed
+        // TODO add your handling code here:
+                String branchName = jTextField1.getText();
+
+        //        this.applicationSystem.getBranch().displaybranches();
+
+        if(this.business.getBranch().branchExists(branchName)){
+            JOptionPane.showMessageDialog(null, "This branch already exists. Pl create new one!");
+        }else{
+            this.business.getBranch().createLibrary(branchName);
+        }
+
+        jTextField1.setText("");
+        populateTable();
+    }//GEN-LAST:event_addBranchBtnActionPerformed
+
+    public void populateTable(){
+        tablemodel.setRowCount(0);
+        for (Library b: this.business.getBranch().getBranches()){
+            Object[] row = new Object[1];
+            row[0] = b;
+            tablemodel.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton addBranchBtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jShowBranchTable;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables

@@ -8,6 +8,7 @@ import Branch.Branch;
 import AppSys.Business;
 import Role.Role;
 import Branch.UserAccount;
+import Ui.Login.MainJFrame;
 
 /**
  *
@@ -56,29 +57,43 @@ public class SysAdminJFrame extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        addCustomerPanel = new javax.swing.JButton();
+        addEmployeePanel = new javax.swing.JButton();
+        manageUserAccountPanel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        addBranchPanel = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        jButton1.setText("Add Customer");
+        addCustomerPanel.setText("Add Customer");
 
-        jButton2.setText("Add Employees");
+        addEmployeePanel.setText("Add Employees");
 
-        jButton4.setText("Manage User Account");
+        manageUserAccountPanel.setText("Manage User Account");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Library Management System");
 
         jLabel2.setText("Role: System Admin");
 
-        jButton5.setText("Add Branch");
+        addBranchPanel.setText("Add Branch");
+        addBranchPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBranchPanelActionPerformed(evt);
+            }
+        });
+
+        logoutBtn.setText("Logout");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,28 +107,37 @@ public class SysAdminJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                        .addComponent(addBranchPanel)
                         .addGap(30, 30, 30)))
-                .addComponent(jButton2)
-                .addGap(14, 14, 14)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(addEmployeePanel)
+                        .addGap(14, 14, 14)
+                        .addComponent(addCustomerPanel)
+                        .addGap(18, 18, 18)
+                        .addComponent(manageUserAccountPanel))
+                    .addComponent(logoutBtn))
                 .addGap(41, 41, 41))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(33, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(logoutBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2)
-                        .addComponent(jButton4)
-                        .addComponent(jButton5))
+                        .addComponent(addCustomerPanel)
+                        .addComponent(addEmployeePanel)
+                        .addComponent(manageUserAccountPanel)
+                        .addComponent(addBranchPanel))
                     .addComponent(jLabel2))
                 .addGap(22, 22, 22))
         );
@@ -124,6 +148,17 @@ public class SysAdminJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addBranchPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBranchPanelActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setBottomComponent(new AddBranchJPanel(this.business, this.useraccount));
+    }//GEN-LAST:event_addBranchPanelActionPerformed
+
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        MainJFrame mj = new MainJFrame(this.business, this.useraccount);
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,13 +196,14 @@ public class SysAdminJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton addBranchPanel;
+    private javax.swing.JButton addCustomerPanel;
+    private javax.swing.JButton addEmployeePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JButton manageUserAccountPanel;
     // End of variables declaration//GEN-END:variables
 }
