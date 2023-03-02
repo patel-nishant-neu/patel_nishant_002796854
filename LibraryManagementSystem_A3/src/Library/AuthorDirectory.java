@@ -12,6 +12,29 @@ import java.util.ArrayList;
  */
 public class AuthorDirectory {
     
-        private ArrayList<Author> authors ; 
+    private ArrayList<Author> authors ; 
+
+    public ArrayList<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(ArrayList<Author> authors) {
+        this.authors = authors;
+    }
         
+    public Author AddBook(String author){
+        Author a = new Author();
+        a.setAuthor(author);
+        this.authors.add(a);
+        return a;
+    }
+    
+    public Author findAuthor(String author){
+        for(Author a : this.authors){
+            if(a.getAuthor().equals(author)){
+                return a;
+            }
+        }
+        return null;
+    }
 }

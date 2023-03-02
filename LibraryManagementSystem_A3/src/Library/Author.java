@@ -10,4 +10,16 @@ package Library;
  */
 public class Author {
     
+    String Author;
+
+    public String getAuthor() {
+        return Author;
+    }
+
+    public void setAuthor(String Author) {
+        this.Author = Author;
+    }
+    
+    
+    
 }

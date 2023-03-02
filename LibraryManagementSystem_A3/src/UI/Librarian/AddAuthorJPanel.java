@@ -7,6 +7,9 @@ package UI.Librarian;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Library.Author;
+import Library.AuthorDirectory;
+import Library.Library;
 
 /**
  *
@@ -40,27 +43,32 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jFieldAuthor = new javax.swing.JTextField();
+        AddAuthorBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jAuthorTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jFieldGenre = new javax.swing.JTextField();
+        AddGenreBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jGenreTable = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add Author");
 
-        jButton1.setText("Add Author");
+        AddAuthorBtn.setText("Add Author");
+        AddAuthorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddAuthorBtnActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Enter Author: ");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jAuthorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -71,17 +79,22 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                 "Author"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jAuthorTable);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Add Genre");
 
-        jButton2.setText("Add Genre");
+        AddGenreBtn.setText("Add Genre");
+        AddGenreBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddGenreBtnActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Enter Genre: ");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jGenreTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
                 {null},
@@ -92,7 +105,7 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                 "Genre"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jGenreTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,12 +118,12 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(130, 130, 130)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AddAuthorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(105, 105, 105)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -119,12 +132,12 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(82, 82, 82)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AddGenreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jFieldGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -139,10 +152,10 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFieldGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(44, 44, 44)
-                        .addComponent(jButton2)
+                        .addComponent(AddGenreBtn)
                         .addGap(48, 48, 48)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -150,29 +163,49 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(41, 41, 41)
-                        .addComponent(jButton1)
+                        .addComponent(AddAuthorBtn)
                         .addGap(45, 45, 45)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(36, 36, 36))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AddAuthorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAuthorBtnActionPerformed
+        // TODO add your handling code here:
+        Library lib = this.business.getBranch().getLibrary();
+        if(lib.getAuthors().findAuthor(jFieldAuthor.getText()) == null){
+            Author a = this.business.getBranch().getLibrary().getAuthors().AddAuthor(jFieldAuthor.getText());
+            //populateAuthorTable();
+        }
+    }//GEN-LAST:event_AddAuthorBtnActionPerformed
+
+    private void AddGenreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddGenreBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddGenreBtnActionPerformed
+
+//    public void populateAuthorTabl(){
+//        tableModel.setRowCount(0);
+//        for(AuthorDirectory a: this.business.getBranch().getLibrary().getAuthors()){
+//            AuthorDirectory au = this.business.getBranch().getLibrary().getAuthors();
+//            
+//        }
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton AddAuthorBtn;
+    private javax.swing.JButton AddGenreBtn;
+    private javax.swing.JTable jAuthorTable;
+    private javax.swing.JTextField jFieldAuthor;
+    private javax.swing.JTextField jFieldGenre;
+    private javax.swing.JTable jGenreTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
