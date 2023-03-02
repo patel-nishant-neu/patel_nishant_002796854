@@ -22,7 +22,7 @@ public class AuthorDirectory {
         this.authors = authors;
     }
         
-    public Author AddBook(String author){
+    public Author AddAuthor(String author){
         Author a = new Author();
         a.setAuthor(author);
         this.authors.add(a);
