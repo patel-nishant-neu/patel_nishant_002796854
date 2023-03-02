@@ -42,6 +42,16 @@ public class UserAccountDirectory {
         return null;
     }
     
+//    public UserAccount authenticateEmployeeUnique(String role, String Branch) {
+//            for(UserAccount ua: this.useraccountlist) {
+                /// Here it should be business branch and not the branch from user Account (Need check)
+//            if(ua.getBranch().equals(Branch) && ua.getRole().equals(role)) {
+//                return ua;
+//            }
+//        }
+//        return null;
+//    }
+    
     public UserAccount getUserAccount(String username, String password, String role) {
         for(UserAccount u: this.useraccountlist) {
             if(u.getUsername().equals(username) && u.getPassword().equals(password) && u.getRole().equals(role)) {

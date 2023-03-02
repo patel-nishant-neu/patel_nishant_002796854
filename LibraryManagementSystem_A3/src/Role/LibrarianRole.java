@@ -5,23 +5,23 @@
 package Role;
 
 import AppSys.Business;
-import Branch.Branch;
 import Branch.UserAccount;
-import Ui.Login.MainJFrame;
+import UI.Librarian.LibrarianJFrame;
+import UI.SystemAdmin.SysAdminJFrame;
 import javax.swing.JFrame;
 
 /**
  *
  * @author narot
  */
-public class BranchSelection {
+public class LibrarianRole extends Role{
     
-    public BranchSelection(){
+    public LibrarianRole(){
         
     }
-    
-    public JFrame getWorkArea(Business business, UserAccount user) {
-        
-        return new MainJFrame(business, user );
+
+    @Override
+    public JFrame createWorkArea(Business business, UserAccount useraccount) {
+        return new LibrarianJFrame(business, useraccount);
     }
 }

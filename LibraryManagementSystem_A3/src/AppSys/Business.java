@@ -7,6 +7,7 @@ package AppSys;
 import Branch.Branch;
 import Role.SystemAdminRole;
 import Branch.UserAccountDirectory;
+import Customer.CustomerDirectory;
 import java.util.ArrayList;
 
 /**
@@ -17,10 +18,12 @@ public class Business {
 
     private Branch branch;
     UserAccountDirectory topLevelUserAccountDirectory;
+    public CustomerDirectory customerDirectoy;
     
     public Business() {
         this.branch = new Branch();
         this.topLevelUserAccountDirectory = new UserAccountDirectory();
+        this.customerDirectoy = new CustomerDirectory();
         
         // CREATING ADMIN
        // this.topLevelUserAccountDirectory.createUserAccount("admin", "admin", new SystemAdminRole());
@@ -42,6 +45,13 @@ public class Business {
         this.topLevelUserAccountDirectory = topLevelUserAccountDirectory;
     }
 
+    public CustomerDirectory getCustomerDirectoy() {
+        return customerDirectoy;
+    }
+
+    public void setCustomerDirectoy(CustomerDirectory customerDirectoy) {
+        this.customerDirectoy = customerDirectoy;
+    }
     
     public static Business getInstance() {
         return new Business();

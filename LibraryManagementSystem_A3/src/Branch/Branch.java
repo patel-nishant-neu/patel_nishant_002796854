@@ -97,6 +97,16 @@ public class Branch {
 
     }
     
+    public Boolean deleteLibrary(Branch branchName) {
+        for(Library b: this.branches) {
+            if(b.getBranchName().equals(branchName)) {
+                this.branches.remove(b);
+                break;
+            }
+        }
+        return false;
+    }
+    
     
     public Boolean branchExists(String branch) {
         for(Library lib: this.branches) {
@@ -113,4 +123,5 @@ public class Branch {
         
             return new BranchSelection().getWorkArea(business, user);
     }
+
 }

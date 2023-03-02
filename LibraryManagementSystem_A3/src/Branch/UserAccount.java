@@ -5,8 +5,10 @@
 package Branch;
 
 import AppSys.Business;
+import Role.LibrarianRole;
 import Role.Role;
 import Role.SystemAdminRole;
+import UI.Librarian.LibrarianJFrame;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +23,7 @@ public class UserAccount {
     private String password;
     private String role;
     private String branch;
+    Role role1;
     
     public UserAccount() {
         this.accountId = "ACC" + count++;
@@ -97,6 +100,9 @@ public class UserAccount {
         // the abstract class way
         if (role.equals("System Admin")) {
             return new SystemAdminRole().createWorkArea(business, useraccount);
+        }
+        if (role.equals("Librarian")) {
+            return new LibrarianRole().createWorkArea(business, useraccount);
         }
         return null;
     }
