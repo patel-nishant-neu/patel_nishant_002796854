@@ -5,9 +5,11 @@
 package Branch;
 
 import AppSys.Business;
+import Role.CustomerRole;
 import Role.LibrarianRole;
 import Role.Role;
 import Role.SystemAdminRole;
+import Role.BranchmanagerRole;
 import UI.Librarian.LibrarianJFrame;
 import javax.swing.JFrame;
 
@@ -99,10 +101,16 @@ public class UserAccount {
     public JFrame getWorkArea(String role, Business business, UserAccount useraccount, String branch) {
         // the abstract class way
         if (role.equals("System Admin")) {
-            return new SystemAdminRole().createWorkArea(business, useraccount);
+            return new SystemAdminRole().createWorkArea(business, useraccount, branch);
         }
         if (role.equals("Librarian")) {
-            return new LibrarianRole().createWorkArea(business, useraccount);
+            return new LibrarianRole().createWorkArea(business, useraccount, branch);
+        }
+        if (role.equals("Customer")) {
+            return new CustomerRole().createWorkArea(business, useraccount, branch);
+        }
+        if (role.equals("Branch Manager")) {
+            return new BranchmanagerRole().createWorkArea(business, useraccount, branch);
         }
         return null;
     }

@@ -44,4 +44,13 @@ public class Genre {
         return g;
     }
     
+    public Genre findGenre(String genre) {
+        for(Genre g : this.genreList){
+            if(g.getGenre().equals(genre)){
+                return g;
+            }
+        }
+        return null;
+    }
+    
 }

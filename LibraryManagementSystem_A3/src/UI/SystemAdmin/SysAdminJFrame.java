@@ -27,7 +27,7 @@ public class SysAdminJFrame extends javax.swing.JFrame {
         initComponents();
     }
         
-    public SysAdminJFrame(Business business, UserAccount useraccount) {
+    public SysAdminJFrame(Business business, UserAccount useraccount, String branch) {
         initComponents();
         this.setVisible(true);
 

@@ -4,10 +4,23 @@
  */
 package Role;
 
+import AppSys.Business;
+import Branch.UserAccount;
+import UI.BranchManager.BranchManagerJFrame;
+import javax.swing.JFrame;
+
 /**
  *
  * @author narot
  */
-public class BranchAdminRole {
+public class BranchmanagerRole extends Role{
+
+    public BranchmanagerRole(){
+        
+    }
+    @Override
+    public JFrame createWorkArea(Business business, UserAccount useraccount, String branch) {
+        return new BranchManagerJFrame(business, useraccount, branch);
+    }
     
 }

@@ -9,7 +9,10 @@ import Branch.Branch;
 import Branch.UserAccount;
 import Library.Author;
 import Library.AuthorDirectory;
+import Library.Genre;
 import Library.Library;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +23,8 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
     Business business;
     UserAccount useraccount;
     Branch branch;
+    DefaultTableModel tableModel1;
+    DefaultTableModel tableModel2;
     /**
      * Creates new form AddAuthorJPanel
      */
@@ -29,8 +34,11 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
     
     public AddAuthorJPanel(Business business, UserAccount useraccount) {
         initComponents();
+        this.setVisible(true);
         this.business = business;
         this.useraccount = useraccount;
+        this.tableModel1 = (DefaultTableModel) jAuthorTable.getModel();
+        this.tableModel2 = (DefaultTableModel) jGenreTable.getModel();
     }
 
     /**
@@ -55,9 +63,13 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jGenreTable = new javax.swing.JTable();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add Author");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 33, 163, -1));
+        add(jFieldAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 102, 103, -1));
 
         AddAuthorBtn.setText("Add Author");
         AddAuthorBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -65,8 +77,10 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                 AddAuthorBtnActionPerformed(evt);
             }
         });
+        add(AddAuthorBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 165, 103, -1));
 
         jLabel2.setText("Enter Author: ");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 105, -1, -1));
 
         jAuthorTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,9 +95,13 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jAuthorTable);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(57, 233, 245, 183));
+
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Add Genre");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 39, 163, -1));
+        add(jFieldGenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(504, 96, 103, -1));
 
         AddGenreBtn.setText("Add Genre");
         AddGenreBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -91,8 +109,10 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
                 AddGenreBtnActionPerformed(evt);
             }
         });
+        add(AddGenreBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 162, 103, -1));
 
         jLabel4.setText("Enter Genre: ");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(419, 99, -1, -1));
 
         jGenreTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,70 +127,7 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jGenreTable);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(AddAuthorBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(AddGenreBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jFieldGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(73, 73, 73))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(39, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFieldGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(44, 44, 44)
-                        .addComponent(AddGenreBtn)
-                        .addGap(48, 48, 48)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(41, 41, 41)
-                        .addComponent(AddAuthorBtn)
-                        .addGap(45, 45, 45)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36))
-        );
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 233, 266, 183));
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddAuthorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAuthorBtnActionPerformed
@@ -178,21 +135,43 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
         Library lib = this.business.getBranch().getLibrary();
         if(lib.getAuthors().findAuthor(jFieldAuthor.getText()) == null){
             Author a = this.business.getBranch().getLibrary().getAuthors().AddAuthor(jFieldAuthor.getText());
-            //populateAuthorTable();
+            populateAuthorTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Author already exist!");
         }
     }//GEN-LAST:event_AddAuthorBtnActionPerformed
 
     private void AddGenreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddGenreBtnActionPerformed
         // TODO add your handling code here:
+        Library lib = this.business.getBranch().getLibrary();
+        if(lib.getGenres().findGenre(jFieldAuthor.getText()) == null){
+            Genre g = this.business.getBranch().getLibrary().getGenres().createGenre(jFieldAuthor.getText());
+            populateGenreTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Genre already exist!");
+        }
     }//GEN-LAST:event_AddGenreBtnActionPerformed
 
-//    public void populateAuthorTabl(){
-//        tableModel.setRowCount(0);
-//        for(AuthorDirectory a: this.business.getBranch().getLibrary().getAuthors()){
-//            AuthorDirectory au = this.business.getBranch().getLibrary().getAuthors();
-//            
-//        }
-//    }
+    public void populateAuthorTable(){
+        
+        tableModel1.setRowCount(0);
+        for(Author a: this.business.getBranch().getLibrary().getAuthors().getAuthors()){
+            Author au = this.business.getBranch().getLibrary().getAuthors().findAuthor(a.getAuthor());
+            Object[] row = new Object[1];
+            row[0] = au.getAuthor();
+            tableModel1.addRow(row);
+        }
+    }
+    
+    public void populateGenreTable() {
+        tableModel2.setRowCount(0);
+        for(Genre g: this.business.getBranch().getLibrary().getGenres().getGenreList()){
+            Genre ge = this.business.getBranch().getLibrary().getGenres().findGenre(g.getGenre());
+            Object[] row = new Object[1];
+            row[0] = ge.getGenre();
+            tableModel1.addRow(row);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddAuthorBtn;

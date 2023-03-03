@@ -21,7 +21,7 @@ public class LibrarianRole extends Role{
     }
 
     @Override
-    public JFrame createWorkArea(Business business, UserAccount useraccount) {
-        return new LibrarianJFrame(business, useraccount);
+    public JFrame createWorkArea(Business business, UserAccount useraccount, String branch) {
+        return new LibrarianJFrame(business, useraccount, branch);
     }
 }
