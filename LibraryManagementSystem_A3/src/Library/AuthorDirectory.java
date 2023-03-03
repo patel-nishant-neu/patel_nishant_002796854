@@ -12,7 +12,11 @@ import java.util.ArrayList;
  */
 public class AuthorDirectory {
     
-    private ArrayList<Author> authors ; 
+    public  ArrayList<Author> authors ; 
+    
+    public AuthorDirectory(){
+        this.authors = new ArrayList<Author>();
+    }
 
     public ArrayList<Author> getAuthors() {
         return authors;

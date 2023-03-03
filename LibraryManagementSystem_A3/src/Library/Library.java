@@ -24,8 +24,8 @@ public class Library {
 
     public Library(){
         this.books = new BookCollection();
-        this.authors = authors;
-        this.genres = genres;
+        this.authors = new AuthorDirectory();
+        this.genres = new Genre();
         this.ed = new EmployeeDirectory();
         this.branchName = branchName;
         this.rentRequestDirectory = new RentRequestDirectory();

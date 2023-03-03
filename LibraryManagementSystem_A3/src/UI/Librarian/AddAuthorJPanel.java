@@ -144,8 +144,8 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
     private void AddGenreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddGenreBtnActionPerformed
         // TODO add your handling code here:
         Library lib = this.business.getBranch().getLibrary();
-        if(lib.getGenres().findGenre(jFieldAuthor.getText()) == null){
-            Genre g = this.business.getBranch().getLibrary().getGenres().createGenre(jFieldAuthor.getText());
+        if(lib.getGenres().findGenre(jFieldGenre.getText()) == null){
+            Genre g = this.business.getBranch().getLibrary().getGenres().createGenre(jFieldGenre.getText());
             populateGenreTable();
         } else {
             JOptionPane.showMessageDialog(null, "Genre already exist!");
