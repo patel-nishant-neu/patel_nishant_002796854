@@ -70,43 +70,39 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add Material");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 29, 191, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 30, 191, -1));
 
         jLabel2.setText("Serial No.: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 86, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         jLabel3.setText("Name: ");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 120, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
 
         jLabel4.setText("Registered date: ");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 161, -1, -1));
 
         jLabel5.setText("Select Genre: ");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 86, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
 
         jLabel6.setText("Select Author: ");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 120, -1, -1));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, -1));
 
         jLabel7.setText("Is Available: ");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 153, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, -1, -1));
 
         jCheckBox1.setText("Available");
-        add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 151, -1, -1));
+        add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, -1, -1));
 
         jLabel8.setText("Matrial Type: ");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(83, 192, -1, -1));
-
-        jTextField1.setText("jTextField1");
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 83, 111, -1));
-
-        jTextField2.setText("jTextField2");
-        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 117, 111, -1));
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 111, -1));
+        add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 111, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 83, 112, -1));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 112, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 117, 112, -1));
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 112, -1));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book", "Magazine" }));
         add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(201, 189, 102, -1));
@@ -135,19 +131,17 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jMaterialTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 324, 674, 265));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 674, 265));
 
         jLabel9.setText("Issue Type: ");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 192, -1, -1));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fortnightly", "Annually" }));
         add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(488, 189, 112, -1));
 
         jLabel10.setText("Company Name: ");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 226, -1, -1));
-
-        jTextField3.setText("jTextField1");
-        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 223, 109, -1));
+        add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 223, 110, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
