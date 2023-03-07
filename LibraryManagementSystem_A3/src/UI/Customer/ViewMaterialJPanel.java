@@ -7,6 +7,12 @@ package UI.Customer;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Customer.Customer;
+import Library.Book;
+import Library.BookCollection;
+import Library.Library;
+import Library.Material;
+import Services.RentRequest;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +25,10 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
     UserAccount useraccount;
     Branch branch;
     DefaultTableModel tableModel1;
+    DefaultTableModel tableModel2;
+    Material selectedMaterial; 
+    Book selectedBook;
+    String selectedBook_branch;
     /**
      * Creates new form ViewMaterialJPanel
      */
@@ -31,7 +41,11 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
         this.setVisible(true);
         this.business = business;
         this.useraccount = useraccount;
-        this.tableModel1 = (DefaultTableModel) jViewMaterialTable.getModel();
+        this.tableModel1 = (DefaultTableModel) jViewBookTable.getModel();
+        this.tableModel2 = (DefaultTableModel) jViewMagazineTable.getModel();
+        
+        populate();
+        populateRentalHistory();
     }
 
     /**
@@ -45,48 +59,221 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jViewMaterialTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jViewBookTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jViewMagazineTable = new javax.swing.JTable();
+        jRentBtn = new javax.swing.JButton();
+        jReturnBtn = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        fieldNoOfDays = new javax.swing.JTextField();
+        totalRentPrice = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Library Materials Listing");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 250, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 250, -1));
 
-        jViewMaterialTable.setModel(new javax.swing.table.DefaultTableModel(
+        jViewBookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Serial No.", "Name", "Registered Date", "Genre", "Author", "Availibility", "Material Type"
+                "ID", "Name", "Author", "Genre", "Branch", "Duration of days ", "Rent Payment"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, true, true
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jViewMaterialTable);
+        jScrollPane1.setViewportView(jViewBookTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 674, 265));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 710, 240));
 
-        jButton1.setText("Request rent");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 130, -1));
+        jViewMagazineTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Name", "Author", "Genre", "Branch", "Availability Status", "Rent Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jViewMagazineTable);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 390, 710, 270));
+
+        jRentBtn.setText("Rent");
+        jRentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRentBtnActionPerformed(evt);
+            }
+        });
+        add(jRentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 120, -1));
+
+        jReturnBtn.setText("Return");
+        jReturnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jReturnBtnActionPerformed(evt);
+            }
+        });
+        add(jReturnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 120, -1));
+
+        jLabel3.setText("Rent duration");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
+        add(fieldNoOfDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 60, -1));
+
+        totalRentPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        totalRentPrice.setText("jLabel2");
+        add(totalRentPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, -1, -1));
+
+        jLabel2.setText("Total Rent Price");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRentBtnActionPerformed
+        // TODO add your handling code here:
+        int duration_of_days = Integer.valueOf(fieldNoOfDays.getText());
+        int selectedRow = jViewBookTable.getSelectedRow();
+
+        this.selectedBook = (Book) jViewBookTable.getValueAt(selectedRow, 0);
+        this.selectedBook_branch = (String) jViewBookTable.getValueAt(selectedRow, 4);
+        
+        
+        for(Library lib : this.business.getBranch().getBranches()){
+            if(lib.getBranchName().equals(selectedBook_branch)){
+                System.out.println("THIS BRANCH NAME IS " + lib.getBranchName());
+                this.business.getBranch().setLibrary(lib);                
+                break;
+            }
+        }
+        
+        System.out.println("\nBOOOK BRANHC " + this.business.getBranch().getLibrary().getBranchName());        
+
+        System.out.println(useraccount.getAccountId());
+        System.out.println(this.business.getCustomerDirectoy().getCustomerlist().size());
+
+        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+ 
+        selectedBook.setStatus("PENDING RENTAL APPROVAL");
+        fieldNoOfDays.setText("");
+        populate();
+    }//GEN-LAST:event_jRentBtnActionPerformed
+
+    private void jReturnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReturnBtnActionPerformed
+        // TODO add your handling code here:
+        
+        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        int selectedRow = jViewBookTable.getSelectedRow();
+
+        this.selectedBook = (Book) jViewBookTable.getValueAt(selectedRow, 0);
+        this.selectedBook_branch = (String) jViewBookTable.getValueAt(selectedRow, 4);
+        
+        
+        for(Library lib : this.business.getBranch().getBranches()){
+            if(lib.getBranchName().equals(selectedBook_branch)){
+                System.out.println("THIS BRANCH NAME IS " + lib.getBranchName());
+                this.business.getBranch().setLibrary(lib);                
+                break;
+            }
+        }
+        
+        this.selectedBook.setStatus("AVAILABLE");
+        populate();
+        fieldNoOfDays.setText("");
+    }//GEN-LAST:event_jReturnBtnActionPerformed
+
+    public void populate() {
+        
+        tableModel1.setRowCount(0);
+        
+        BookCollection books = this.business.getBranch().getLibrary().getBooks();
+        
+        for(Library lib : this.business.getBranch().getBranches()) {
+            for(Book a : lib.getBooks().getBooks()){
+                
+                Object row[] = new Object[7];
+                row[0] = a;
+                row[1] = a.getBookName();
+                row[2] = a.getAuthorName();
+                row[3] = a.getGenreName();
+                row[4] = lib.getBranchName();
+                row[5] = a.getStatus();
+                row[6] = a.getPrice();
+
+                tableModel1.addRow(row);
+            }
+
+        }
+        
+        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        
+        if(c.getCustomerRentalList().size() > 0){
+            for(RentRequest r : c.getCustomerRentalList()){
+                System.out.println("\nRental ID : " + r.getOrderId());
+            }
+        }
+        
+    }
+    
+    public void populateRentalHistory() {
+        
+        tableModel2.setRowCount(0);
+        
+        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        BookCollection books = this.business.getBranch().getLibrary().getBooks();
+   
+        
+        if(c.getCustomerRentalList().size() > 0){
+            for(Library lib : this.business.getBranch().getBranches()) {
+                for(RentRequest r : c.getCustomerRentalList()){
+                       if(lib.findBookById(r.getBook().getId())){
+                           
+                            Object row[] = new Object[7];
+                            row[0] = r.getBook().getId();
+                            row[1] = r.getBook().getBookName();
+                            row[2] = r.getBook().getAuthorName();
+                            row[3] = r.getBook().getGenreName();
+                            row[4] = lib.getBranchName();
+                            row[5] = r.getDuration_of_days();
+                            row[6] = r.getRentalRequestPrice();
+
+                            tableModel2.addRow(row);
+                       }else{
+//                           System.out.println("Not there ");
+                       }
+
+                   }
+
+               }           
+            }
+        totalRentPrice.setText(String.valueOf(c.getRentalsTotal()));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField fieldNoOfDays;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jRentBtn;
+    private javax.swing.JButton jReturnBtn;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jViewMaterialTable;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jViewBookTable;
+    private javax.swing.JTable jViewMagazineTable;
+    private javax.swing.JLabel totalRentPrice;
     // End of variables declaration//GEN-END:variables
 }

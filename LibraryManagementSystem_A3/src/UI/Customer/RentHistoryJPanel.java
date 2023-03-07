@@ -7,6 +7,13 @@ package UI.Customer;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Customer.Customer;
+import Library.Book;
+import Library.BookCollection;
+import Library.Library;
+import Library.MagazineCollection;
+import Library.Material;
+import Services.RentRequest;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +26,9 @@ public class RentHistoryJPanel extends javax.swing.JPanel {
     UserAccount useraccount;
     Branch branch;
     DefaultTableModel tableModel1;
+    Material selectedMaterial; 
+    Book selectedBook;
+    String selectedBook_branch;
     /**
      * Creates new form RentHistoryJPanel
      */
@@ -32,6 +42,10 @@ public class RentHistoryJPanel extends javax.swing.JPanel {
         
         this.business = business;
         this.useraccount = useraccount;
+        
+        this.tableModel1 = (DefaultTableModel) jTableRentHistory.getModel();
+        
+        populateRentHistory();
     }
 
     /**
@@ -45,35 +59,89 @@ public class RentHistoryJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableRentHistory = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLableTotalRentPrice = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Rent History");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 163, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 163, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRentHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Issue ID", "Issue date", "Book Name", "Material Type", "Issue Type", "Status"
+                "Issue ID", "Book Name", "Branch", "Rent Duration", "Rent Cost"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableRentHistory);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 760, 300));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 760, 300));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Total Amount paid: ");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, -1, -1));
+
+        jLableTotalRentPrice.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLableTotalRentPrice.setText("jLabel3");
+        add(jLableTotalRentPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 110, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+    public void populateRentHistory() {
+        
+        tableModel1.setRowCount(0);
+        
+        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        BookCollection books = this.business.getBranch().getLibrary().getBooks();
+        MagazineCollection md = this.business.getBranch().getLibrary().getMd();
+   
+        
+        if(c.getCustomerRentalList().size() > 0){
+            for(Library lib : this.business.getBranch().getBranches()) {
+                for(RentRequest r : c.getCustomerRentalList()){
+                       if(lib.findBookById(r.getBook().getId())){                        
+                           
+                            Object row[] = new Object[5];
+                            
+                            row[0] = r.getBook().getId();
+                            row[1] = r.getBook().getBookName();
+                            row[2] = lib.getBranchName();
+                            row[3] = r.getDuration_of_days();
+                            row[4] = r.getRentalRequestPrice();
 
+                            tableModel1.addRow(row);
+                            
+                        }   else if(lib.findMagById(r.getMagazine().getId())){
+                           
+                            Object row[] = new Object[5];
+                            
+                            row[0] = r.getMagazine().getId();
+                            row[1] = r.getMagazine().getComapany_name();
+                            row[2] = lib.getBranchName();
+                            row[3] = r.getDuration_of_days();
+                            row[4] = r.getRentalRequestPrice();
+
+                            tableModel1.addRow(row);
+                       }
+
+                   }
+
+               }           
+            }
+        jLableTotalRentPrice.setText(String.valueOf(c.getRentalsTotal()));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLableTotalRentPrice;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableRentHistory;
     // End of variables declaration//GEN-END:variables
 }

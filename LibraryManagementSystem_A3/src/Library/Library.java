@@ -128,6 +128,35 @@ public class Library {
         this.rentRequestDirectory = rentRequestDirectory;
     }
     
+    public Boolean findBookById(String id) {
+        for(Book b: this.books.getBooks()) {
+            if(b.getId().equals(id)) {
+//                System.out.println(b.getName());
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public Boolean findMagById(String id) {
+        for(Magazine m: this.magazineCollection.getMagazines()) {
+            if(m.getId().equals(id)) {
+//                System.out.println(b.getName());
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public float TotalRevenue(){
+        for(RentRequest r : rentRequestDirectory.getOrderlist()){
+            totalRevenue = totalRevenue + r.getRentalRequestPrice();
+        }
+        return totalRevenue;
+    }
+    
     @Override
     public String toString(){
         return String.valueOf(this.branchName);
