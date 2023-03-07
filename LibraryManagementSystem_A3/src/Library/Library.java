@@ -16,7 +16,7 @@ public class Library {
     
     BookCollection books;
     AuthorDirectory authors;
-    Genre genres;
+    GenreDirectory genres;
     EmployeeDirectory ed;
     String branchName;
     String material;
@@ -29,7 +29,7 @@ public class Library {
     public Library(){
         this.books = new BookCollection();
         this.authors = new AuthorDirectory();
-        this.genres = new Genre();
+        this.genres = new GenreDirectory();
         this.ed = new EmployeeDirectory();
         this.branchName = branchName;
         this.rentRequestDirectory = new RentRequestDirectory();
@@ -80,11 +80,11 @@ public class Library {
         this.authors = authors;
     }
 
-    public Genre getGenres() {
+    public GenreDirectory getGenres() {
         return genres;
     }
 
-    public void setGenres(Genre genres) {
+    public void setGenres(GenreDirectory genres) {
         this.genres = genres;
     }
 

@@ -183,6 +183,9 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             UserAccount user = this.business.getBranch().getBranchuseraccountDirectory().createUserAccount(fieldusername1.getText(), fieldPassword1.getText(), "Customer", branchValue);
             this.business.getBranch().getBranchcustomerdirectory().createCustomer(user.getAccountId(), fieldname1.getText());
             populateTable();
+            fieldusername1.setText("");
+            fieldPassword1.setText("");
+            fieldname1.setText("");
         }
         else {
             JOptionPane.showMessageDialog(null, "Sorry credentials are taken.");

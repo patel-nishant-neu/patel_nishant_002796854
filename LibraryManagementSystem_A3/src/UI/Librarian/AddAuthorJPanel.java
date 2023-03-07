@@ -39,6 +39,9 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
         this.useraccount = useraccount;
         this.tableModel1 = (DefaultTableModel) jAuthorTable.getModel();
         this.tableModel2 = (DefaultTableModel) jGenreTable.getModel();
+        
+        populateAuthorTable();
+        populateGenreTable();
     }
 
     /**
@@ -136,6 +139,7 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
         if(lib.getAuthors().findAuthor(jFieldAuthor.getText()) == null){
             Author a = this.business.getBranch().getLibrary().getAuthors().AddAuthor(jFieldAuthor.getText());
             populateAuthorTable();
+            jFieldAuthor.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "Author already exist!");
         }
@@ -147,6 +151,7 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
         if(lib.getGenres().findGenre(jFieldGenre.getText()) == null){
             Genre g = this.business.getBranch().getLibrary().getGenres().createGenre(jFieldGenre.getText());
             populateGenreTable();
+            jFieldGenre.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "Genre already exist!");
         }
@@ -169,7 +174,7 @@ public class AddAuthorJPanel extends javax.swing.JPanel {
             Genre ge = this.business.getBranch().getLibrary().getGenres().findGenre(g.getGenre());
             Object[] row = new Object[1];
             row[0] = ge.getGenre();
-            tableModel1.addRow(row);
+            tableModel2.addRow(row);
         }
     }
 

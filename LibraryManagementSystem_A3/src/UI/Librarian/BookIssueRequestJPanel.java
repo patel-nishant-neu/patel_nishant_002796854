@@ -7,6 +7,8 @@ package UI.Librarian;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Services.RentRequest;
+import Services.RentRequestDirectory;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +21,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
     UserAccount useraccount;
     Branch branch;
     DefaultTableModel tableModel1;
+    DefaultTableModel tableModel2;
     /**
      * Creates new form BookIssueRequestJPanel
      */
@@ -32,6 +35,10 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
         this.business = business;
         this.useraccount = useraccount;
         this.tableModel1 = (DefaultTableModel) jBookIssueTable.getModel();
+        this.tableModel1 = (DefaultTableModel) jMagazineIssueTable.getModel();
+        
+        displayBookIssues();
+        displayMagazineIssues();
     }
         
     /**
@@ -45,50 +52,209 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        jMagazineIssueTable = new javax.swing.JTable();
+        jAcceptIssueBtn = new javax.swing.JButton();
+        jRejectIssueBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jBookIssueTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Book Issue Request");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 27, 191, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Magazine Issues: ");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 191, -1));
+
+        jMagazineIssueTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "RentalID", "Name", "Customer ID", "Book ID", "Issue Duraction", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jMagazineIssueTable);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 627, 199));
+
+        jAcceptIssueBtn.setBackground(new java.awt.Color(204, 255, 204));
+        jAcceptIssueBtn.setText("Accept Issue");
+        jAcceptIssueBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAcceptIssueBtnActionPerformed(evt);
+            }
+        });
+        add(jAcceptIssueBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 580, -1, -1));
+
+        jRejectIssueBtn.setBackground(new java.awt.Color(255, 204, 204));
+        jRejectIssueBtn.setText("Reject Issue");
+        jRejectIssueBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRejectIssueBtnActionPerformed(evt);
+            }
+        });
+        add(jRejectIssueBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 580, -1, -1));
 
         jBookIssueTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "RentalID", "Price", "Type", "RentDuration", "Status"
+                "RentalID", "Name", "Customer ID", "Book ID", "Issue Duraction", "Status"
             }
-        ));
-        jScrollPane1.setViewportView(jBookIssueTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+            };
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 88, 627, 199));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jBookIssueTable);
 
-        jButton1.setText("Accept Issue");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 330, -1, -1));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 627, 199));
 
-        jButton2.setText("Reject Issue");
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 330, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Issue Request");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 27, 191, -1));
 
-        jButton3.setText("Issue Returned");
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 330, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setText("Book Issues: ");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 191, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jAcceptIssueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAcceptIssueBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedrow = jBookIssueTable.getSelectedRow();
+        int selectedrow_mag = jMagazineIssueTable.getSelectedRow();
+
+
+//        System.out.println("\nRENTAL REQUEST ACCEPTED!! ");
+        if(selectedrow >= 0){
+            RentRequest r = (RentRequest) jBookIssueTable.getValueAt(selectedrow, 0);
+            r.getBook().setStatus("RENTED");
+            r.getCustomer().addOrder(r);
+            r.setRentalRequestPrice((r.getCustomer().calculateRentPrice(r.getDuration_of_days(), r.getBook().getPrice())));           
+            r.getCustomer().setRentalsTotal(r.getCustomer().calculateTotalPrice(r.getRentalRequestPrice()));
+        }
+
+        if(selectedrow_mag >= 0){
+            RentRequest r_mag = (RentRequest) jMagazineIssueTable.getValueAt(selectedrow_mag, 0);
+            r_mag.getMagazine().setStatus("RENTED");
+            r_mag.getCustomer().addOrder(r_mag);
+            r_mag.setRentalRequestPrice((r_mag.getCustomer().calculateRentPrice(r_mag.getDuration_of_days(), r_mag.getMagazine().getPrice())));           
+            r_mag.getCustomer().setRentalsTotal(r_mag.getCustomer().calculateTotalPrice(r_mag.getRentalRequestPrice()));
+        }
+        
+        displayBookIssues();
+        displayMagazineIssues();
+    }//GEN-LAST:event_jAcceptIssueBtnActionPerformed
+
+    private void jRejectIssueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRejectIssueBtnActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedrow = jBookIssueTable.getSelectedRow();
+        int selectedrow_mag = jMagazineIssueTable.getSelectedRow();
+
+
+//        System.out.println("\nRENTAL REQUEST ACCEPTED!! ");
+        if(selectedrow >= 0){
+            RentRequest r = (RentRequest) jBookIssueTable.getValueAt(selectedrow, 0);
+            r.getBook().setStatus("AVAILABLE");
+        }
+
+        if(selectedrow_mag >= 0){
+            RentRequest r_mag = (RentRequest) jMagazineIssueTable.getValueAt(selectedrow_mag, 0);
+            r_mag.getMagazine().setStatus("AVAILABLE");
+        }
+        
+        displayBookIssues();
+        displayMagazineIssues();
+        
+    }//GEN-LAST:event_jRejectIssueBtnActionPerformed
+
+    public void displayBookIssues(){
+                   
+        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentalRequestDirectory();
+        
+        
+        if(requests.getOrderlist().size() > 0){
+            
+            tableModel1.setRowCount(0);
+            for(RentRequest r : requests.getOrderlist()){
+//                System.out.println("\nTHISS " + r.getBook().getName()); 
+                if(r.getMaterial().equals("Book")){
+                    Object row[] = new Object[6];
+                    row[0] = r;
+                    row[1] = r.getOrderId();
+                    row[2] = r.getCustomer().getPersonID();
+                    row[3] = r.getBook().getId();
+                    row[4] = r.getDuration_of_days();
+                    row[5] = r.getBook().getStatus();
+
+                    tableModel2.addRow(row);                    
+                }            
+            }
+        }
+        else{
+            System.out.println("No Book rental Request are found");
+        }   
+    }
+    
+    public void displayMagazineIssues(){
+                   
+        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentalRequestDirectory();
+        
+        
+        if(requests.getOrderlist().size() > 0){
+            
+            tableModel2.setRowCount(0);
+            for(RentRequest r : requests.getOrderlist()){
+//                System.out.println("\nTHISS " + r.getBook().getName()); 
+                if(r.getMaterial().equals("Magazine")){
+                    Object row[] = new Object[6];
+                    row[0] = r;
+                    row[1] = r.getOrderId();
+                    row[2] = r.getCustomer().getPersonID();
+                    row[3] = r.getMagazine().getId();
+                    row[4] = r.getDuration_of_days();
+                    row[5] = r.getMagazine().getStatus();
+                    tableModel2.addRow(row);
+                }                
+            }
+
+        }
+        else{
+            System.out.println("No Magazine rental request are found");
+        }   
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jAcceptIssueBtn;
     private javax.swing.JTable jBookIssueTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTable jMagazineIssueTable;
+    private javax.swing.JButton jRejectIssueBtn;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

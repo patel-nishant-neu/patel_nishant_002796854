@@ -7,6 +7,7 @@ package UI.Librarian;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Library.Library;
 import Ui.Login.MainJFrame;
 
 /**
@@ -16,7 +17,7 @@ import Ui.Login.MainJFrame;
 public class LibrarianJFrame extends javax.swing.JFrame {
 
     Business business;
-    Branch branch;
+    String branch;
     UserAccount useraccount;
     /**
      * Creates new form LibrarianJFrame
@@ -31,6 +32,15 @@ public class LibrarianJFrame extends javax.swing.JFrame {
         
         this.business = business;
         this.useraccount = useraccount;
+        this.branch = branch;
+        
+       for(Library lib : this.business.getBranch().getBranches()){
+            if(lib.getBranchName().equals(branch)){
+                this.business.getBranch().setLibrary(lib);
+                jLabel3.setText(branch);
+                break;
+            }
+        }
     }
 
     /**
@@ -168,7 +178,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jSplitPane1.setBottomComponent(new AddMaterialJPanel(this.business, this.useraccount));
+        jSplitPane1.setBottomComponent(new AddMaterialJPanel(this.business, this.useraccount, this.branch));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

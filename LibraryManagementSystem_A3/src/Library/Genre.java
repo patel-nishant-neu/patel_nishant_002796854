@@ -14,10 +14,10 @@ public class Genre {
     
     String genre;
     
-    ArrayList<Genre> genreList;
+
     
     public Genre(){
-        this.genreList = new ArrayList<Genre>();
+        
     }
 
     public String getGenre() {
@@ -28,29 +28,6 @@ public class Genre {
         this.genre = genre;
     }
 
-    public ArrayList<Genre> getGenreList() {
-        return genreList;
-    }
-
-    public void setGenreList(ArrayList<Genre> genreList) {
-        this.genreList = genreList;
-    }
     
-    public Genre createGenre(String genre){
-        Genre g = new Genre();
-        g.setGenre(genre);
-        g.genreList.add(g);
-        
-        return g;
-    }
-    
-    public Genre findGenre(String genre) {
-        for(Genre g : this.genreList){
-            if(g.getGenre().equals(genre)){
-                return g;
-            }
-        }
-        return null;
-    }
     
 }

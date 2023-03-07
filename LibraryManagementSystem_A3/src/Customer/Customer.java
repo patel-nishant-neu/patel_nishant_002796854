@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Customer extends Person{
     
-    private int rentalsTotal;
+    private float rentalsTotal;
     
     private ArrayList<RentRequest> customerRentalList;
     
@@ -24,11 +24,11 @@ public class Customer extends Person{
         this.rentalsTotal = 0;
     }
 
-    public int getRentalsTotal() {
+    public float getRentalsTotal() {
         return rentalsTotal;
     }
 
-    public void setRentalsTotal(int rentalsTotal) {
+    public void setRentalsTotal(float rentalsTotal) {
         this.rentalsTotal = rentalsTotal;
     }
 
@@ -50,7 +50,7 @@ public class Customer extends Person{
     }
     
     public float calculateTotalPrice(float rentPrice) {
-        rentalsTotal = (int) (rentalsTotal + rentPrice);
+        rentalsTotal = rentalsTotal + rentPrice;
         return rentalsTotal;
     }
 }

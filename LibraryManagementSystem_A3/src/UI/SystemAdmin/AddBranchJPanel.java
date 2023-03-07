@@ -102,12 +102,12 @@ public class AddBranchJPanel extends javax.swing.JPanel {
 
     private void addBranchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBranchBtnActionPerformed
         // TODO add your handling code here:
-                String branchName = jTextField1.getText();
+        String branchName = jTextField1.getText();
 
         //        this.applicationSystem.getBranch().displaybranches();
 
         if(this.business.getBranch().branchExists(branchName)){
-            JOptionPane.showMessageDialog(null, "This branch already exists. Pl create new one!");
+            JOptionPane.showMessageDialog(null, "This branch already exists. Please create new Branch!");
         }else{
             this.business.getBranch().createLibrary(branchName);
         }

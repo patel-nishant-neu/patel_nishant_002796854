@@ -86,6 +86,8 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 249, -1, 32));
+
+        FieldExprience.setToolTipText("");
         add(FieldExprience, new org.netbeans.lib.awtextra.AbsoluteConstraints(403, 159, 162, -1));
 
         jLabel3.setText("Enter Exprience: ");
@@ -132,7 +134,7 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
         UserAccountDirectory ua = this.business.getBranch().getBranchuseraccountDirectory();
         String branch = (String) showBranches.getSelectedItem();
         String branchValue = showBranches.getSelectedItem().toString();
-        String Role = (String) jComboBoxRole.getSelectedItem();
+        //String Role = (String) jComboBoxRole.getSelectedItem();
         String roleValue = jComboBoxRole.getSelectedItem().toString();
    
         if(!this.branch.branchExists(branch)){
@@ -147,8 +149,13 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
         else{
             // save the customer obj for user and useraccount credentials
             UserAccount user = this.business.getBranch().getBranchuseraccountDirectory().createUserAccount(fieldUsername.getText(), fieldPwd.getText(), roleValue, branchValue);
-            this.business.getBranch().getLibrary().getEd().createEmployee(user.getAccountId(), fieldName.getText(), FieldExprience.getText(), fieldUsername.getText() );
+            this.business.getBranch().getLibrary().getEd().createEmployee(user.getAccountId(), fieldName.getText(), Integer.valueOf(FieldExprience.getText()), roleValue );
             populateTable();
+            fieldUsername.setText("");
+            fieldPwd.setText("");
+            fieldName.setText("");
+            FieldExprience.setText("");
+            
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
