@@ -7,31 +7,52 @@ package UI.BranchManager;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Library.Book;
+import Library.BookCollection;
+import Library.Library;
+import Library.Magazine;
+import Library.MagazineCollection;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author narot
  */
-public class ViewIssuesJPanel extends javax.swing.JPanel {
+public class ViewMaterialsJPanel extends javax.swing.JPanel {
 
     Business business;
     UserAccount useraccount;
     Branch branch;
     DefaultTableModel tableModel1;
+    DefaultTableModel tableModel2;
+    Book selectedBook;
     /**
      * Creates new form ViewIssuesJPanel
      */
-    public ViewIssuesJPanel() {
+    public ViewMaterialsJPanel() {
         initComponents();
     }
     
-    public ViewIssuesJPanel(Business business, UserAccount useraccount) {
+    public ViewMaterialsJPanel(Business business, UserAccount useraccount) {
         initComponents();
         this.setVisible(true);
         
         this.business = business;
         this.useraccount = useraccount;
+        this.branch = branch;
+        
+        this.tableModel1 = (DefaultTableModel) jTable1.getModel();
+        this.tableModel2 = (DefaultTableModel) jTable2.getModel();
+                
+        for(Library lib : this.business.getBranch().getBranches()){
+            if(lib.getBranchName().equals(branch)){
+//                System.out.println("THIS BRANCH NAME IS " + lib.getBranchName());
+                this.business.getBranch().setLibrary(lib);
+                break;
+            }
+        }
+        displayBooks();
+        displayMags();
     }
 
     /**
@@ -45,41 +66,123 @@ public class ViewIssuesJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jBookIssueTable = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("View Issue Requests");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 250, -1));
+        jLabel1.setText("Library Material Listing");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 40, 250, -1));
 
-        jBookIssueTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Rental ID", "Book Name", "Customer Name", "Type", "Rent Duration", "Price", "Status"
+                "ID", "Material Type", "Name", "author", "genre", "Language", "No of Pages", "Reg. Date", "Type of Binding", "Rent Price"
             }
-        ));
-        jScrollPane1.setViewportView(jBookIssueTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 780, 410));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 1020, 280));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Material Type", "Company Name", "genre", "Language", "Issue Type", "Reg. Date", "Rent Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 1020, 280));
     }// </editor-fold>//GEN-END:initComponents
+    public void displayBooks(){
+        
+        BookCollection books = this.business.getBranch().getLibrary().getBooks();
+       
+        if(books.getBooks().size() > 0){
+            
+            tableModel1.setRowCount(0);
+            for(Book a : books.getBooks()){
+                
+                Object row[] = new Object[10];
+                row[0] = a;
+                row[1] = a.getMaterialType();
+                row[2] = a.getBookName();
+                row[3] = a.getAuthorName();
+                row[4] = a.getGenreName();
+                row[5] = a.getLanguage();
+                row[6] = a.getNo_of_pages();
+                row[7] = a.getRegisteredDate();
+                row[8] = a.getBindingType();
+                row[9] = a.getPrice();
+                
+                
+                tableModel1.addRow(row);
+                System.out.println(a.getStatus());
+            }
+        }
+        else{
+            System.out.println("Empty List");
+        }   
+    }
+   
+    public void displayMags(){
+        
+        MagazineCollection md = this.business.getBranch().getLibrary().getMd();
+       
+        if(md.getMagazines().size() > 0){
+            
+            tableModel2.setRowCount(0);
+            for(Magazine m : md.getMagazines()){
+                
+                Object row[] = new Object[8];
+                row[0] = m;
+                row[1] = m.getMaterialType();
+                row[2] = m.getComapany_name();
+                row[3] = m.getGenre();
+                row[4] = m.getLanguage();
+                row[5] = m.getIssue_type();
+                row[6] = m.getRegisteredDate();
+                row[7] = m.getPrice();
 
+                
+                
+                tableModel2.addRow(row);
+                System.out.println(m.getStatus());
+            }
+        }
+        else{
+            System.out.println("Empty List");
+        }   
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable jBookIssueTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

@@ -333,7 +333,7 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
             jFieldBookName.setEnabled(false);
             jfieldPages.setEnabled(false);
             jComboBoxAuthor.setEnabled(false);
-            jComboBoxGenre.setEnabled(false);
+            jComboBoxGenre.setEnabled(true);
         }    
     }//GEN-LAST:event_jComboBoxMaterialTypeActionPerformed
 
@@ -357,14 +357,18 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         String material = String.valueOf(jComboBoxMaterialType.getSelectedItem());
         String id =  jTextFieldID.getText();
         String name = jFieldBookName.getText();
+        
         String author = (String) jComboBoxAuthor.getSelectedItem();
         String authorValue = jComboBoxAuthor.getSelectedItem().toString();
         String genre = (String) jComboBoxGenre.getSelectedItem();
         String genreValue = jComboBoxGenre.getSelectedItem().toString();
+        
         String language = String.valueOf(jComboBoxLanguage.getSelectedItem());
         Integer pages = Integer.valueOf(jfieldPages.getText());
         String regDate = jFieldRegDate.getText();
+
         String binding = String.valueOf(jComboBoxBinding.getSelectedItem());
+        
         Float price = Float.valueOf(jFieldMaterialPrice.getText());
         String issueType = String.valueOf(jComboBoxIssueType.getSelectedItem());
         String company_name = jFieldCompanyName.getText();
@@ -374,12 +378,33 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         if(material.equals("Book")){
             mat.setType("Book");
             books.addBooks(id, name, authorValue, genreValue, pages, language, regDate, binding, price);
+            
+            jTextFieldID.setText("");
+            jFieldBookName.setText("");
+            showAuthors();
+            showGenre();
+            jfieldPages.setText("");
+            jFieldRegDate.setText("");
+            jFieldMaterialPrice.setText("");
+            jFieldCompanyName.setText("");
+            jComboBoxMaterialType.setSelectedIndex(0);
+            jComboBoxBinding.setSelectedIndex(0);
+            jComboBoxLanguage.setSelectedIndex(0);
+            jComboBoxIssueType.setSelectedIndex(0);
         }
         else if(material.equals("Magazine")){
             mat.setType("Magazine");
             md.addMagazines(id, company_name, genreValue, language, issueType, regDate, price);
-        }
 
+            jTextFieldID.setText("");
+            showGenre();
+            jFieldRegDate.setText("");
+            jFieldMaterialPrice.setText("");
+            jFieldCompanyName.setText("");
+            jComboBoxMaterialType.setSelectedIndex(0);
+            jComboBoxLanguage.setSelectedIndex(0);
+            jComboBoxIssueType.setSelectedIndex(0);
+        }
         displayBooks();
         displayMags();
     }//GEN-LAST:event_jButtonAddMaterialActionPerformed

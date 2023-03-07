@@ -186,6 +186,7 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
             fieldusername1.setText("");
             fieldPassword1.setText("");
             fieldname1.setText("");
+            showBranches.setSelectedIndex(0);
         }
         else {
             JOptionPane.showMessageDialog(null, "Sorry credentials are taken.");

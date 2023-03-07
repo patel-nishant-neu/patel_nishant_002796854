@@ -18,7 +18,6 @@ public class ViewRevenueJPanel extends javax.swing.JPanel {
     Business business;
     UserAccount useraccount;
     Branch branch;
-    DefaultTableModel tableModel1;
     /**
      * Creates new form ViewRevenueJPanel
      */
@@ -32,6 +31,8 @@ public class ViewRevenueJPanel extends javax.swing.JPanel {
         
         this.business = business;
         this.useraccount = useraccount;
+        
+        jLable1.setText(String.valueOf(this.business.getBranch().getLibrary().getTotalRevenue()));
     }
 
     /**
@@ -43,15 +44,15 @@ public class ViewRevenueJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLable1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("jLable1");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 170, -1));
+        jLable1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLable1.setText("jLable1");
+        add(jLable1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 140, 170, -1));
 
         jLabel2.setText("Total revenue of the year is: ");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
@@ -64,8 +65,8 @@ public class ViewRevenueJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLable1;
     // End of variables declaration//GEN-END:variables
 }

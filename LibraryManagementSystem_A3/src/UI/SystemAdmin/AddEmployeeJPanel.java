@@ -150,13 +150,15 @@ public class AddEmployeeJPanel extends javax.swing.JPanel {
             // save the customer obj for user and useraccount credentials
             UserAccount user = this.business.getBranch().getBranchuseraccountDirectory().createUserAccount(fieldUsername.getText(), fieldPwd.getText(), roleValue, branchValue);
             this.business.getBranch().getLibrary().getEd().createEmployee(user.getAccountId(), fieldName.getText(), Integer.valueOf(FieldExprience.getText()), roleValue );
-            populateTable();
+            
             fieldUsername.setText("");
             fieldPwd.setText("");
             fieldName.setText("");
             FieldExprience.setText("");
-            
+            showBranches.setSelectedIndex(0);
+            jComboBoxRole.setSelectedIndex(0);
         }
+        populateTable();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -17,7 +17,7 @@ public class CustomerJFrame extends javax.swing.JFrame {
 
     Business business;
     UserAccount useraccount;
-    Branch branch;
+    String branch;
     /**
      * Creates new form CustomerJFrame
      */
@@ -31,6 +31,9 @@ public class CustomerJFrame extends javax.swing.JFrame {
         
         this.business = business;
         this.useraccount = useraccount;
+        this.branch = branch;
+        
+        jLabel3.setText(branch);
     }
 
     /**

@@ -37,7 +37,7 @@ public class AddBranchJPanel extends javax.swing.JPanel {
         this.useraccount = useraccount;
         this.tablemodel = (DefaultTableModel) jShowBranchTable.getModel();
         
-        //populateTable();
+        populateTable();
     }
 
     /**

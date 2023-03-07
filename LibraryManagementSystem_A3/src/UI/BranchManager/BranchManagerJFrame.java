@@ -17,7 +17,7 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
 
     Business business;
     UserAccount useraccount;
-    Branch branch;
+    String branch;
     /**
      * Creates new form BranchManagerJFrame
      */
@@ -31,6 +31,9 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
         
         this.business = business;
         this.useraccount = useraccount;
+        this.branch = branch;
+        
+        jLabel3.setText(branch);
     }
 
     /**
@@ -56,14 +59,14 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
 
         jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
-        viewmaterialBtn.setText("View Materials");
+        viewmaterialBtn.setText("View Issues");
         viewmaterialBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewmaterialBtnActionPerformed(evt);
             }
         });
 
-        viewIssuesBtn.setText("View Issues");
+        viewIssuesBtn.setText("View Materials");
         viewIssuesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 viewIssuesBtnActionPerformed(evt);
@@ -107,9 +110,9 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(LogoutBtn)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(viewmaterialBtn)
-                        .addGap(18, 18, 18)
                         .addComponent(viewIssuesBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewmaterialBtn)
                         .addGap(18, 18, 18)
                         .addComponent(viewRevenueBtn)))
                 .addGap(42, 42, 42))
@@ -150,12 +153,12 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
 
     private void viewmaterialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewmaterialBtnActionPerformed
         // TODO add your handling code here:
-        jSplitPane1.setBottomComponent(new ViewMaterialsJPanel(this.business, this.useraccount));
+        jSplitPane1.setBottomComponent(new ViewIssuesJPanel(this.business, this.useraccount));
     }//GEN-LAST:event_viewmaterialBtnActionPerformed
 
     private void viewIssuesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewIssuesBtnActionPerformed
         // TODO add your handling code here:
-        jSplitPane1.setBottomComponent(new ViewIssuesJPanel(this.business, this.useraccount));
+        jSplitPane1.setBottomComponent(new ViewMaterialsJPanel(this.business, this.useraccount));
     }//GEN-LAST:event_viewIssuesBtnActionPerformed
 
     private void viewRevenueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRevenueBtnActionPerformed

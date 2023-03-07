@@ -59,9 +59,9 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="LogoutBtn" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="viewmaterialBtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="viewIssuesBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="viewmaterialBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="viewRevenueBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -101,7 +101,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="viewmaterialBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="View Materials"/>
+                <Property name="text" type="java.lang.String" value="View Issues"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewmaterialBtnActionPerformed"/>
@@ -109,7 +109,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="viewIssuesBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="View Issues"/>
+                <Property name="text" type="java.lang.String" value="View Materials"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewIssuesBtnActionPerformed"/>

@@ -7,13 +7,18 @@ package UI.BranchManager;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Customer.Customer;
+import Library.BookCollection;
+import Library.MagazineCollection;
+import Services.RentRequest;
+import Services.RentRequestDirectory;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author narot
  */
-public class ViewMaterialsJPanel extends javax.swing.JPanel {
+public class ViewIssuesJPanel extends javax.swing.JPanel {
 
     Business business;
     UserAccount useraccount;
@@ -22,16 +27,19 @@ public class ViewMaterialsJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewMaterialsJPanel
      */
-    public ViewMaterialsJPanel() {
+    public ViewIssuesJPanel() {
         initComponents();
     }
 
-    public ViewMaterialsJPanel(Business business, UserAccount useraccount) {
+    public ViewIssuesJPanel(Business business, UserAccount useraccount) {
         initComponents();
         this.setVisible(true);
         
         this.business = business;
         this.useraccount = useraccount;
+        this.tableModel1 = (DefaultTableModel) jTable2.getModel();
+        
+        populateRentalHistory();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,43 +52,91 @@ public class ViewMaterialsJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jMaterialTable = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Library Material Listing");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 290, -1));
+        jLabel1.setText("Library Rental History");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, 290, -1));
 
-        jMaterialTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Serial No.", "Name", "Registered Date", "Genre", "Author", "Availibility", "Amterial Type"
+                "Rental ID", "Material Type", "Material ID", "Material Name", "Customer ID", "Customer Name", "Duration of days ", "Status", "Rent Payment"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, true, true
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Float.class
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jMaterialTable);
+        jScrollPane1.setViewportView(jTable2);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 674, 265));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 980, 410));
     }// </editor-fold>//GEN-END:initComponents
-
+    public void populateRentalHistory(){
+        tableModel1.setRowCount(0);
+        
+        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        BookCollection books = this.business.getBranch().getLibrary().getBooks();
+        MagazineCollection md = this.business.getBranch().getLibrary().getMd();
+                   
+        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentalRequestDirectory();
+        
+        if(requests.getOrderlist().size() > 0){
+            
+            tableModel1.setRowCount(0);
+            for(RentRequest r : requests.getOrderlist()){
+//                System.out.println("\nTHISS " + r.getBook().getName()); 
+                if(r.getMaterial().equals("Book")){
+                    Object row[] = new Object[9];
+                    row[0] = r;
+                    row[1] = r.getMaterial();
+                    row[2] = r.getBook().getId();
+                    row[3] = r.getBook().getBookName();
+                    row[4] = r.getCustomer().getPersonID();
+                    row[5] = r.getCustomer().getName();
+                    row[6] = r.getDuration_of_days();
+                    row[7] = r.getBook().getStatus();
+                    row[8] = r.getRentalRequestPrice();
+                    
+                    tableModel1.addRow(row);    
+                    
+                }else if(r.getMaterial().equals("Magazine")){
+                    Object row[] = new Object[9];
+                    row[0] = r;
+                    row[1] = r.getMaterial();
+                    row[2] = r.getMagazine().getId();
+                    row[3] = r.getMagazine().getComapany_name();
+                    row[4] = r.getCustomer().getPersonID();
+                    row[5] = r.getCustomer().getName();
+                    row[6] = r.getDuration_of_days();
+                    row[7] = r.getMagazine().getStatus();
+                    row[8] = r.getRentalRequestPrice();
+                    
+                    tableModel1.addRow(row);
+                }             
+            }
+        }
+        else{
+            System.out.println("Empty List");
+        }
+        
+        this.business.getBranch().getLibrary().TotalRevenue();
+        System.out.println(this.business.getBranch().getLibrary().getTotalRevenue());
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTable jMaterialTable;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

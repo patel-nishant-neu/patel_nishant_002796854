@@ -99,10 +99,10 @@ public class UserAccount {
             return new LibrarianJFrame(business, useraccount, branch);
         }
         if (role.equals("Customer")) {
-            return new BranchManagerJFrame(business, useraccount, branch);
+            return new CustomerJFrame(business, useraccount, branch);
         }
         if (role.equals("Branch Manager")) {
-            return new CustomerJFrame(business, useraccount, branch);
+            return new BranchManagerJFrame(business, useraccount, branch);
         }
         return null;
     }

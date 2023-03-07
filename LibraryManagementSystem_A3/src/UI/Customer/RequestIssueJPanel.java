@@ -196,7 +196,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         
         Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
         
-        if(c.getCustomerRentalList().size() > 0){
+        if(c.getCustomerRentalList().size() >= 0){
             for(RentRequest r : c.getCustomerRentalList()){
                 System.out.println("\nRental ID : " + r.getOrderId());
             }
@@ -208,7 +208,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         
         MagazineCollection md = this.business.getBranch().getLibrary().getMd();
        
-        if(md.getMagazines().size() > 0){
+        if(md.getMagazines().size() >= 0){
             
             tableModel2.setRowCount(0);
             for(Library lib : this.business.getBranch().getBranches()) {
@@ -239,13 +239,11 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
     }
     private void jRentMagBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRentMagBtnActionPerformed
         // TODO add your handling code here:
-        int duration_of_days = Integer.valueOf(jNoDaysMag.getText());
+        int duration_of_days = Integer.parseInt(jNoDaysMag.getText());
         int selectedRowMag = jTable2.getSelectedRow();
         String materialType = "Magazine";
 
         this.selectedMag = (Magazine) jTable2.getValueAt(selectedRowMag, 0);
-        
-         System.out.println("HEREEEE BC");
         
         this.selectedBook_branch_mag = (String) jTable2.getValueAt(selectedRowMag, 8);
 
@@ -273,7 +271,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         
         selectedMag.setStatus("PENDING RENTAL APPROVAL");
         
-        System.out.println("SIZEEE BC" + this.business.getBranch().getLibrary().getRentalRequestDirectory().getOrderlist().size());
+        System.out.println("Size" + this.business.getBranch().getLibrary().getRentalRequestDirectory().getOrderlist().size());
 
         
 //        populateBooks();
@@ -282,13 +280,11 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
 
     private void jBookRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBookRentBtnActionPerformed
         // TODO add your handling code here:
-        int duration_of_days = Integer.valueOf(jNoDaysBook.getText());
+        int duration_of_days = Integer.parseInt(jNoDaysBook.getText());
         int selectedRow = jTable1.getSelectedRow();
         String materialType = "Book";
 
         this.selectedBook = (Book) jTable1.getValueAt(selectedRow, 0);
-        
-         System.out.println("HEREEEE BC");
         
         this.selectedBook_branch = (String) jTable1.getValueAt(selectedRow, 9);
 
@@ -310,8 +306,6 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         // create order
 //        selectedMaterial.setBook(selectedBook);
         RentRequest r =  this.business.getBranch().getLibrary().getRentalRequestDirectory().requestOrder(c, selectedBook, duration_of_days, materialType);
-        
-        System.out.println("DONNEEEEE BC");
         
         selectedBook.setStatus("PENDING RENTAL APPROVAL");
         
