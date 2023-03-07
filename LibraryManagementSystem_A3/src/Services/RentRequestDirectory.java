@@ -5,6 +5,8 @@
 package Services;
 
 import Customer.Customer;
+import Library.Book;
+import Library.Magazine;
 import java.util.ArrayList;
 
 /**
@@ -27,19 +29,40 @@ public class RentRequestDirectory {
     }
     
     // create a new order
-    public RentRequest createOrder(Customer customer) {
-        RentRequest o = new RentRequest(customer);
+    public RentRequest createOrder(Customer customer, Book  book, int duration, String material) {
+        RentRequest o = new RentRequest(customer, book, duration,material);
         this.rentalList.add(o);
         return o;
     }
     
-    public RentRequest requestOrder(Customer customer) {
+    public RentRequest createOrderMag(Customer customer, Magazine magazine, int duration, String material) {
+        RentRequest o = new RentRequest(customer, magazine, duration, material);
+        this.rentalList.add(o);
+        return o;
+    }
+    
+    public RentRequest requestOrder(Customer customer, Book  book, int duration, String material) {
         
         RentRequest o = new RentRequest();
         o.setCustomer(customer);
+        o.setBook(book);
+        o.setDuration_of_days(duration);
+        o.setMaterial(material);
         
         this.rentalList.add(o);
-                System.out.println("Here");
+        return o;
+    }
+    
+        public RentRequest requestOrderMag(Customer customer, Magazine  magazine, int duration, String material) {
+        
+        RentRequest o = new RentRequest();
+        o.setCustomer(customer);
+        o.setMagazine(magazine);
+        o.setDuration_of_days(duration);
+        o.setMaterial(material);
+        
+        this.rentalList.add(o);
+//                System.out.println("Here");
         return o;
     }
 }

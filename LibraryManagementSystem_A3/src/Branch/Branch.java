@@ -7,7 +7,6 @@ package Branch;
 import AppSys.Business;
 import Customer.CustomerDirectory;
 import Library.Library;
-import Role.BranchSelection;
 import Role.SystemAdminRole;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -117,11 +116,11 @@ public class Branch {
         return false;
     }
     
-    public JFrame getWorkArea(Business business, UserAccount user) {
-        
-        System.out.println("Branch");
-        
-            return new BranchSelection().getWorkArea(business, user);
-    }
+//    public JFrame getWorkArea(Business business, UserAccount user) {
+//        
+//        System.out.println("Branch");
+//        
+//            return new BranchSelection().getWorkArea(business, user);
+//    }
 
 }

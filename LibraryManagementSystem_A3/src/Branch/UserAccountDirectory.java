@@ -13,10 +13,15 @@ import java.util.ArrayList;
  * @author narot
  */
 public class UserAccountDirectory {
-        private ArrayList<UserAccount> useraccountlist;
+    
+    private ArrayList<UserAccount> useraccountlist;
     
     public UserAccountDirectory() {
         this.useraccountlist = new ArrayList<UserAccount>();
+    }
+    
+    public String[] getAllRoles() {
+       return Role.getAllRoles();
     }
 
     public ArrayList<UserAccount> getUseraccountList() {
@@ -31,6 +36,15 @@ public class UserAccountDirectory {
         UserAccount user = new UserAccount(name, password, role, Branch);
         this.useraccountlist.add(user);
         return user;
+    }
+    
+    public UserAccount findById(String id) {
+        for(UserAccount u: this.useraccountlist) {
+            if(u.getAccountId().equals(id)) {
+                return u;
+            }
+        }
+        return null;
     }
     
     public UserAccount authenticateUser(String name, String password, String role) {
@@ -62,13 +76,13 @@ public class UserAccountDirectory {
         return null;
     }
     
-    public UserAccount findById(String id) {
+    public Boolean accountExists(String username, String password, String role) {
         for(UserAccount u: this.useraccountlist) {
-            if(u.getAccountId().equals(id)) {
-                return u;
+            if(u.getUsername().equals(username) && u.getPassword().equals(password) && u.getRole().equals(role)) {
+                return true;
             }
         }
         
-        return null;
+        return false;
     }
 }

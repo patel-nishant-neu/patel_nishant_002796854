@@ -4,6 +4,7 @@
  */
 package Employee;
 
+import Customer.Customer;
 import java.util.ArrayList;
 
 /**
@@ -12,22 +13,22 @@ import java.util.ArrayList;
  */
 public class EmployeeDirectory {
     
-    private ArrayList<Employee> employees;
+    private ArrayList<Employee> employeeList;
     
     public EmployeeDirectory(){
-        this.employees = new ArrayList<Employee>();
+        this.employeeList = new ArrayList<Employee>();
     }
 
     public ArrayList<Employee> getEmployees() {
-        return employees;
+        return employeeList;
     }
 
     public void setEmployees(ArrayList<Employee> employees) {
-        this.employees = employees;
+        this.employeeList = employees;
     }
     
     public Employee findByID(String ID) {
-        for (Employee e: this.employees){
+        for (Employee e: this.employeeList){
             if(e.getPersonID().equals(ID)){
                 return e;
             }
@@ -35,13 +36,13 @@ public class EmployeeDirectory {
         return null;
     }
     
-    public Employee createEmployee(String ID, String name, String Exprience, String Designation){
+    public Employee createEmployee(String ID, String name, Integer Exprience, String Designation){
         Employee employee = new Employee();
         employee.setPersonID(ID);
         employee.setName(name);
         employee.setExprience(Exprience);
         employee.setDesignation(Designation);
-        this.employees.add(employee);
+        this.employeeList.add(employee);
         return employee;
     }
 }

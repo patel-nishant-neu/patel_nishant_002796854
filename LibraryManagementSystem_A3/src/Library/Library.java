@@ -19,6 +19,10 @@ public class Library {
     Genre genres;
     EmployeeDirectory ed;
     String branchName;
+    String material;
+    MagazineCollection magazineCollection;
+    Material materialDir;
+    private float totalRevenue;
 
     RentRequestDirectory rentRequestDirectory;
 
@@ -29,7 +33,10 @@ public class Library {
         this.ed = new EmployeeDirectory();
         this.branchName = branchName;
         this.rentRequestDirectory = new RentRequestDirectory();
-        
+        this.material = material;
+        this.magazineCollection = new MagazineCollection();
+        this.materialDir = new Material();
+        this.totalRevenue = 0;
     }
 
     
@@ -80,7 +87,46 @@ public class Library {
     public void setGenres(Genre genres) {
         this.genres = genres;
     }
-    
+
+    public String getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(String material) {
+        this.material = material;
+    }
+
+    public MagazineCollection getMd() {
+        return magazineCollection;
+    }
+
+    public void setMd(MagazineCollection magazineCollection) {
+        this.magazineCollection = magazineCollection;
+    }
+
+    public Material getMat() {
+        return materialDir;
+    }
+
+    public void setMat(Material materialDir) {
+        this.materialDir = materialDir;
+    }
+
+    public float getTotalRevenue() {
+        return totalRevenue;
+    }
+
+    public void setTotalRevenue(float totalRevenue) {
+        this.totalRevenue = totalRevenue;
+    }
+
+    public RentRequestDirectory getRentRequestDirectory() {
+        return rentRequestDirectory;
+    }
+
+    public void setRentRequestDirectory(RentRequestDirectory rentRequestDirectory) {
+        this.rentRequestDirectory = rentRequestDirectory;
+    }
     
     @Override
     public String toString(){

@@ -12,7 +12,7 @@ import Personnel.Person;
  */
 public class Employee extends Person{
     
-    String Exprience;
+    Integer Exprience;
     String Designation;
     
     public Employee(){
@@ -21,11 +21,11 @@ public class Employee extends Person{
         this.Exprience = Exprience;
     }
 
-    public String getExprience() {
+    public Integer getExprience() {
         return Exprience;
     }
 
-    public void setExprience(String Exprience) {
+    public void setExprience(Integer Exprience) {
         this.Exprience = Exprience;
     }
 

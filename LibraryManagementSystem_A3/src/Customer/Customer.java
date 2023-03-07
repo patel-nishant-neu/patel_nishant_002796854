@@ -21,6 +21,7 @@ public class Customer extends Person{
     public Customer(){
         super();
         this.customerRentalList = new ArrayList<RentRequest>();
+        this.rentalsTotal = 0;
     }
 
     public int getRentalsTotal() {
@@ -43,4 +44,13 @@ public class Customer extends Person{
         this.customerRentalList.add(rentrequest);
     }
     
+    public float calculateRentPrice(int numDays, float dailyRate) {
+        float rentPrice = numDays * dailyRate;
+        return rentPrice;
+    }
+    
+    public float calculateTotalPrice(float rentPrice) {
+        rentalsTotal = (int) (rentalsTotal + rentPrice);
+        return rentalsTotal;
+    }
 }

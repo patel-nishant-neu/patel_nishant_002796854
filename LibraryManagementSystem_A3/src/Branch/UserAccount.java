@@ -5,11 +5,10 @@
 package Branch;
 
 import AppSys.Business;
-import Role.CustomerRole;
-import Role.LibrarianRole;
 import Role.Role;
 import Role.SystemAdminRole;
-import Role.BranchmanagerRole;
+import UI.BranchManager.BranchManagerJFrame;
+import UI.Customer.CustomerJFrame;
 import UI.Librarian.LibrarianJFrame;
 import javax.swing.JFrame;
 
@@ -25,7 +24,7 @@ public class UserAccount {
     private String password;
     private String role;
     private String branch;
-    Role role1;
+    //Role role1;
     
     public UserAccount() {
         this.accountId = "ACC" + count++;
@@ -35,19 +34,12 @@ public class UserAccount {
         this.branch = branch;
     }
     public UserAccount(String username, String password, String role, String branch) {
-        this.accountId = "user" + count++;
+        this.accountId = role + count++;
         this.username = username;
         this.password = password;
         this.role = role;
         this.branch = branch;
     }
-    
-//    UserAccount(String username, String password, Role role) {
-//        this.accountId = "user" + this.count++;
-//        this.username = username;
-//        this.password = password;
-//        this.role = role;
-//    }
 
     public String getAccountId() {
         return accountId;
@@ -104,13 +96,13 @@ public class UserAccount {
             return new SystemAdminRole().createWorkArea(business, useraccount, branch);
         }
         if (role.equals("Librarian")) {
-            return new LibrarianRole().createWorkArea(business, useraccount, branch);
+            return new LibrarianJFrame(business, useraccount, branch);
         }
         if (role.equals("Customer")) {
-            return new CustomerRole().createWorkArea(business, useraccount, branch);
+            return new BranchManagerJFrame(business, useraccount, branch);
         }
         if (role.equals("Branch Manager")) {
-            return new BranchmanagerRole().createWorkArea(business, useraccount, branch);
+            return new CustomerJFrame(business, useraccount, branch);
         }
         return null;
     }
