@@ -97,12 +97,8 @@ public class Branch {
     }
     
     public Boolean deleteLibrary(Branch branchName) {
-        for(Library b: this.branches) {
-            if(b.getBranchName().equals(branchName)) {
-                this.branches.remove(b);
-                break;
-            }
-        }
+        this.branches.remove(branchName);
+
         return false;
     }
     

@@ -18,6 +18,7 @@ public class RentRequest {
     String status;
     Book book;
     Magazine magazine;
+    String branch;
 
     int duration_of_days;
     float rentalRequestPrice;
@@ -56,6 +57,14 @@ public class RentRequest {
         this.material = material;
     }
 
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+    
     public Customer getCustomer() {
         return customer;
     }

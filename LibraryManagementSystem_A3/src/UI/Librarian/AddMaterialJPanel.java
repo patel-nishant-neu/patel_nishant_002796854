@@ -40,6 +40,7 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
     public AddMaterialJPanel(Business business, UserAccount useraccount, String branch) {
         initComponents();
         this.setVisible(true);
+        
         this.business = business;
         this.useraccount = useraccount;
         this.branch = branch;
@@ -126,7 +127,7 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         add(jTextFieldID, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 111, -1));
         add(jFieldMaterialPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 111, -1));
 
-        jComboBoxIssueType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Weekly", "Fortnightly", "Monthly", "" }));
+        jComboBoxIssueType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Weekly", "Fortnightly", "Monthly" }));
         jComboBoxIssueType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxIssueTypeActionPerformed(evt);
@@ -138,9 +139,9 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         add(jComboBoxAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 112, -1));
 
         jComboBoxMaterialType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book", "Magazine" }));
-        jComboBoxMaterialType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxMaterialTypeActionPerformed(evt);
+        jComboBoxMaterialType.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jComboBoxMaterialTypeFocusLost(evt);
             }
         });
         add(jComboBoxMaterialType, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 110, -1));
@@ -223,6 +224,7 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 790, 240));
     }// </editor-fold>//GEN-END:initComponents
     private void displayBooks() {
+        
         BookCollection books = this.business.getBranch().getLibrary().getBooks();
        
         if(books.getBooks().size() > 0){
@@ -241,7 +243,6 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
                 row[7] = a.getRegisteredDate();
                 row[8] = a.getBindingType();
                 row[9] = a.getPrice();
-                
                 
                 tableModel1.addRow(row);
                 System.out.println(a.getStatus());
@@ -270,8 +271,6 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
                 row[6] = m.getRegisteredDate();
                 row[7] = m.getPrice();
 
-                
-                
                 tableModel2.addRow(row);
                 System.out.println(m.getStatus());
             }
@@ -309,36 +308,9 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxIssueTypeActionPerformed
 
-    private void jComboBoxMaterialTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMaterialTypeActionPerformed
-        // TODO add your handling code here:
-        BookCollection books = this.business.getBranch().getLibrary().getBooks();
-        MagazineCollection md = this.business.getBranch().getLibrary().getMd();
-
-        String material = String.valueOf(jComboBoxMaterialType.getSelectedItem());
-        System.out.println(material);
-
-        if(material.equals("Book")){
-            jFieldBookName.setEnabled(true);
-            jComboBoxBinding.setEnabled(true);
-            jfieldPages.setEnabled(true);
-            jComboBoxAuthor.setEnabled(true);
-            jComboBoxGenre.setEnabled(true);
-            jFieldCompanyName.setEnabled(false);
-            jComboBoxIssueType.setEnabled(false);
-        }
-        else if(material.equals("Magazine")){
-            jFieldCompanyName.setEnabled(true);
-            jComboBoxIssueType.setEnabled(true);
-            jComboBoxBinding.setEnabled(false);
-            jFieldBookName.setEnabled(false);
-            jfieldPages.setEnabled(false);
-            jComboBoxAuthor.setEnabled(false);
-            jComboBoxGenre.setEnabled(true);
-        }    
-    }//GEN-LAST:event_jComboBoxMaterialTypeActionPerformed
-
     private void jButtonAddMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMaterialActionPerformed
         // TODO add your handling code here:
+        
         for(Library lib : this.business.getBranch().getBranches()){
             if(lib.getBranchName().equals(branch)){
 //                System.out.println("THIS BRANCH NAME IS " + lib.getBranchName());
@@ -378,36 +350,60 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         if(material.equals("Book")){
             mat.setType("Book");
             books.addBooks(id, name, authorValue, genreValue, pages, language, regDate, binding, price);
-            
+
+        }
+        else if(material.equals("Magazine")){
+            mat.setType("Magazine");
+            md.addMagazines(id, company_name, genreValue, language, issueType, regDate, price);
+
+        }
+        
+                    
             jTextFieldID.setText("");
             jFieldBookName.setText("");
             showAuthors();
             showGenre();
-            jfieldPages.setText("");
-            jFieldRegDate.setText("");
+            jfieldPages.setText("0");
+            jFieldRegDate.setText("0");
             jFieldMaterialPrice.setText("");
             jFieldCompanyName.setText("");
             jComboBoxMaterialType.setSelectedIndex(0);
             jComboBoxBinding.setSelectedIndex(0);
             jComboBoxLanguage.setSelectedIndex(0);
             jComboBoxIssueType.setSelectedIndex(0);
-        }
-        else if(material.equals("Magazine")){
-            mat.setType("Magazine");
-            md.addMagazines(id, company_name, genreValue, language, issueType, regDate, price);
-
-            jTextFieldID.setText("");
-            showGenre();
-            jFieldRegDate.setText("");
-            jFieldMaterialPrice.setText("");
-            jFieldCompanyName.setText("");
-            jComboBoxMaterialType.setSelectedIndex(0);
-            jComboBoxLanguage.setSelectedIndex(0);
-            jComboBoxIssueType.setSelectedIndex(0);
-        }
+            
         displayBooks();
         displayMags();
     }//GEN-LAST:event_jButtonAddMaterialActionPerformed
+
+    private void jComboBoxMaterialTypeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBoxMaterialTypeFocusLost
+        // TODO add your handling code here:
+        
+        BookCollection books = this.business.getBranch().getLibrary().getBooks();
+        MagazineCollection md = this.business.getBranch().getLibrary().getMd();
+
+        String material = String.valueOf(jComboBoxMaterialType.getSelectedItem());
+        System.out.println(material);
+
+        if(material.equals("Book")){
+            jFieldBookName.setEnabled(true);
+            jComboBoxBinding.setEnabled(true);
+            jfieldPages.setEnabled(true);
+            jComboBoxAuthor.setEnabled(true);
+            jComboBoxGenre.setEnabled(true);
+            jFieldCompanyName.setEnabled(false);
+            jComboBoxIssueType.setEnabled(false);
+        }
+        else if(material.equals("Magazine")){
+            jFieldCompanyName.setEnabled(true);
+            jComboBoxIssueType.setEnabled(true);
+            jFieldBookName.setEnabled(false);
+            jComboBoxBinding.setEnabled(false);
+            jComboBoxAuthor.setEnabled(false);
+            jfieldPages.setEnabled(false);
+            jComboBoxGenre.setEnabled(false);
+        }
+    }//GEN-LAST:event_jComboBoxMaterialTypeFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

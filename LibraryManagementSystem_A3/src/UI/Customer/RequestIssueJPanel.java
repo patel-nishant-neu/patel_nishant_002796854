@@ -196,7 +196,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         
         Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
         
-        if(c.getCustomerRentalList().size() >= 0){
+        if(c.getCustomerRentalList().size() > 0){
             for(RentRequest r : c.getCustomerRentalList()){
                 System.out.println("\nRental ID : " + r.getOrderId());
             }
@@ -208,7 +208,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         
         MagazineCollection md = this.business.getBranch().getLibrary().getMd();
        
-        if(md.getMagazines().size() >= 0){
+        if(md.getMagazines().size() > 0){
             
             tableModel2.setRowCount(0);
             for(Library lib : this.business.getBranch().getBranches()) {
@@ -225,9 +225,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
                     row[7] = lib.getBranchName();
                     row[8] = m.getStatus();
                     row[9] = m.getPrice();
-
-
-
+                    
                     tableModel2.addRow(row);
                     System.out.println(m.getStatus());
                 }

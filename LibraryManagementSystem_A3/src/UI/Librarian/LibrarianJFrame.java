@@ -183,7 +183,7 @@ public class LibrarianJFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        jSplitPane1.setBottomComponent(new BookIssueRequestJPanel(this.business, this.useraccount));
+        jSplitPane1.setBottomComponent(new BookIssueRequestJPanel(this.business, this.useraccount, this.branch));
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

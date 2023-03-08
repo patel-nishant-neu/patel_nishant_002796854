@@ -8,6 +8,7 @@ import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
 import Customer.Customer;
+import Customer.CustomerDirectory;
 import Library.Book;
 import Library.BookCollection;
 import Library.Library;
@@ -169,6 +170,7 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
         Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
  
         selectedBook.setStatus("PENDING RENTAL APPROVAL");
+ 
         fieldNoOfDays.setText("");
         populate();
     }//GEN-LAST:event_jRentBtnActionPerformed
@@ -219,13 +221,13 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
 
         }
         
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
-        
-        if(c.getCustomerRentalList().size() > 0){
-            for(RentRequest r : c.getCustomerRentalList()){
-                System.out.println("\nRental ID : " + r.getOrderId());
-            }
-        }
+//        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+//        
+//        if(!c.getCustomerRentalList().isEmpty()){
+//            for(RentRequest r : c.getCustomerRentalList()){
+//                System.out.println("\nRental ID : " + r.getOrderId());
+//            }
+//        }
         
     }
     
@@ -233,13 +235,12 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
         
         tableModel2.setRowCount(0);
         
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer cust = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
         BookCollection books = this.business.getBranch().getLibrary().getBooks();
-   
         
-        if(c.getCustomerRentalList().size() > 0){
+        if(cust.getCustomerRentalList().size() > 0){
             for(Library lib : this.business.getBranch().getBranches()) {
-                for(RentRequest r : c.getCustomerRentalList()){
+                for(RentRequest r : cust.getCustomerRentalList()){
                        if(lib.findBookById(r.getBook().getId())){
                            
                             Object row[] = new Object[7];
@@ -260,7 +261,7 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
 
                }           
             }
-        totalRentPrice.setText(String.valueOf(c.getRentalsTotal()));
+        totalRentPrice.setText(String.valueOf(cust.getRentalsTotal()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

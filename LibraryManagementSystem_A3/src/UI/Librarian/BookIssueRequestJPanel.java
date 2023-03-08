@@ -7,6 +7,8 @@ package UI.Librarian;
 import AppSys.Business;
 import Branch.Branch;
 import Branch.UserAccount;
+import Library.Book;
+import Library.Library;
 import Services.RentRequest;
 import Services.RentRequestDirectory;
 import javax.swing.table.DefaultTableModel;
@@ -19,9 +21,11 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
 
     Business business;
     UserAccount useraccount;
-    Branch branch;
+    String branch;
     DefaultTableModel tableModel1;
     DefaultTableModel tableModel2;
+    
+    Book selectedBook;
     /**
      * Creates new form BookIssueRequestJPanel
      */
@@ -29,13 +33,21 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public BookIssueRequestJPanel(Business business, UserAccount useraccount) {
+    public BookIssueRequestJPanel(Business business, UserAccount useraccount, String Branch) {
         initComponents();
         this.setVisible(true);
         this.business = business;
         this.useraccount = useraccount;
+        this.branch = branch;
         this.tableModel1 = (DefaultTableModel) jBookIssueTable.getModel();
         this.tableModel1 = (DefaultTableModel) jMagazineIssueTable.getModel();
+        
+        for(Library lib : this.business.getBranch().getBranches()){
+            if(lib.getBranchName().equals(branch)){
+                this.business.getBranch().setLibrary(lib);
+                break;
+            }
+        }
         
         displayBookIssues();
         displayMagazineIssues();
@@ -149,6 +161,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
 //        System.out.println("\nRENTAL REQUEST ACCEPTED!! ");
         if(selectedrow >= 0){
             RentRequest r = (RentRequest) jBookIssueTable.getValueAt(selectedrow, 0);
+            r.setStatus("ACCEPTED");
             r.getBook().setStatus("RENTED");
             r.getCustomer().addOrder(r);
             r.setRentalRequestPrice((r.getCustomer().calculateRentPrice(r.getDuration_of_days(), r.getBook().getPrice())));           
@@ -157,6 +170,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
 
         if(selectedrow_mag >= 0){
             RentRequest r_mag = (RentRequest) jMagazineIssueTable.getValueAt(selectedrow_mag, 0);
+            r_mag.setStatus("ACCEPTED");
             r_mag.getMagazine().setStatus("RENTED");
             r_mag.getCustomer().addOrder(r_mag);
             r_mag.setRentalRequestPrice((r_mag.getCustomer().calculateRentPrice(r_mag.getDuration_of_days(), r_mag.getMagazine().getPrice())));           
@@ -178,11 +192,15 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
         if(selectedrow >= 0){
             RentRequest r = (RentRequest) jBookIssueTable.getValueAt(selectedrow, 0);
             r.getBook().setStatus("AVAILABLE");
+            r.setStatus("REJECTED");
+            r.getCustomer().addOrder(r);
         }
 
         if(selectedrow_mag >= 0){
             RentRequest r_mag = (RentRequest) jMagazineIssueTable.getValueAt(selectedrow_mag, 0);
             r_mag.getMagazine().setStatus("AVAILABLE");
+            r_mag.setStatus("REJECTED");
+            r_mag.getCustomer().addOrder(r_mag);
         }
         
         displayBookIssues();
@@ -199,50 +217,59 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
             
             tableModel1.setRowCount(0);
             for(RentRequest r : requests.getOrderlist()){
-//                System.out.println("\nTHISS " + r.getBook().getName()); 
                 if(r.getMaterial().equals("Book")){
-                    Object row[] = new Object[6];
-                    row[0] = r;
-                    row[1] = r.getOrderId();
-                    row[2] = r.getCustomer().getPersonID();
-                    row[3] = r.getBook().getId();
-                    row[4] = r.getDuration_of_days();
-                    row[5] = r.getBook().getStatus();
+                    if(r.getBranch().equals(this.business.getBranch().getLibrary().getBranchName())){
+                        System.out.println("YESSSS" + r.getBranch());
+                        Object row[] = new Object[6];
+                        row[0] = r;
+                        row[1] = r.getOrderId();
+                        row[2] = r.getCustomer().getPersonID();
+                        row[3] = r.getBook().getId();
+                        row[4] = r.getDuration_of_days();
+                        row[5] = r.getBook().getStatus();
 
-                    tableModel2.addRow(row);                    
+                        tableModel1.addRow(row);                      
+                    }
+                    else{
+                        System.out.println(r.getBranch());
+                    }
+                }                   
                 }            
-            }
         }
         else{
-            System.out.println("No Book rental Request are found");
-        }   
+            System.out.println("Empty List");
+        }  
     }
     
     public void displayMagazineIssues(){
                    
         RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentalRequestDirectory();
         
-        
         if(requests.getOrderlist().size() > 0){
             
             tableModel2.setRowCount(0);
             for(RentRequest r : requests.getOrderlist()){
-//                System.out.println("\nTHISS " + r.getBook().getName()); 
-                if(r.getMaterial().equals("Magazine")){
-                    Object row[] = new Object[6];
-                    row[0] = r;
-                    row[1] = r.getOrderId();
-                    row[2] = r.getCustomer().getPersonID();
-                    row[3] = r.getMagazine().getId();
-                    row[4] = r.getDuration_of_days();
-                    row[5] = r.getMagazine().getStatus();
-                    tableModel2.addRow(row);
-                }                
+                if(!r.getMaterial().equals("Book")){
+                     if(r.getBranch().equals(this.business.getBranch().getLibrary().getBranchName())){                       
+                        Object row[] = new Object[6];
+                        row[0] = r;
+                        row[1] = r.getOrderId();
+                        row[2] = r.getCustomer().getPersonID();
+                        row[3] = r.getMagazine().getId();
+                        row[4] = r.getDuration_of_days();
+                        row[5] = r.getMagazine().getStatus();
+                        tableModel2.addRow(row);                                          
+                    }
+                        else{
+                        System.out.println("NOOOOO" + r.getBranch());
+                    }
+                }
             }
+                
 
         }
         else{
-            System.out.println("No Magazine rental request are found");
+            System.out.println("Empty List");
         }   
     }
 
