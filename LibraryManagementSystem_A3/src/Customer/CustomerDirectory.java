@@ -29,7 +29,7 @@ public class CustomerDirectory {
     public Customer findById(String id) {
         for(Customer c: this.customerlist) {
             if(c.getPersonID().equals(id)) {
-                System.out.println(c.getName());
+                //System.out.println(c.getName());
                 return c;
             }
         }

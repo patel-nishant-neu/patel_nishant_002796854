@@ -165,9 +165,9 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
         System.out.println("\nBOOOK BRANHC " + this.business.getBranch().getLibrary().getBranchName());        
 
         System.out.println(useraccount.getAccountId());
-        System.out.println(this.business.getCustomerDirectoy().getCustomerlist().size());
+        System.out.println(this.business.getBranch().getBranchcustomerdirectory().getCustomerlist().size());
 
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
  
         selectedBook.setStatus("PENDING RENTAL APPROVAL");
  
@@ -178,7 +178,7 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
     private void jReturnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReturnBtnActionPerformed
         // TODO add your handling code here:
         
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         int selectedRow = jViewBookTable.getSelectedRow();
 
         this.selectedBook = (Book) jViewBookTable.getValueAt(selectedRow, 0);
@@ -235,7 +235,7 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
         
         tableModel2.setRowCount(0);
         
-        Customer cust = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer cust = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         BookCollection books = this.business.getBranch().getLibrary().getBooks();
         
         if(cust.getCustomerRentalList().size() > 0){

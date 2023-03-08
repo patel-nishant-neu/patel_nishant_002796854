@@ -97,7 +97,7 @@ public class RentHistoryJPanel extends javax.swing.JPanel {
         
         tableModel1.setRowCount(0);
         
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         BookCollection books = this.business.getBranch().getLibrary().getBooks();
         MagazineCollection md = this.business.getBranch().getLibrary().getMd();
    

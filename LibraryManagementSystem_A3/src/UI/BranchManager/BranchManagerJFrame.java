@@ -153,17 +153,17 @@ public class BranchManagerJFrame extends javax.swing.JFrame {
 
     private void viewmaterialBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewmaterialBtnActionPerformed
         // TODO add your handling code here:
-        jSplitPane1.setBottomComponent(new ViewIssuesJPanel(this.business, this.useraccount));
+        jSplitPane1.setBottomComponent(new ViewIssuesJPanel(this.business, this.useraccount, this.branch));
     }//GEN-LAST:event_viewmaterialBtnActionPerformed
 
     private void viewIssuesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewIssuesBtnActionPerformed
         // TODO add your handling code here:
-        jSplitPane1.setBottomComponent(new ViewMaterialsJPanel(this.business, this.useraccount));
+        jSplitPane1.setBottomComponent(new ViewMaterialsJPanel(this.business, this.useraccount, this.branch));
     }//GEN-LAST:event_viewIssuesBtnActionPerformed
 
     private void viewRevenueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRevenueBtnActionPerformed
         // TODO add your handling code here:
-        jSplitPane1.setBottomComponent(new ViewRevenueJPanel(this.business, this.useraccount));
+        jSplitPane1.setBottomComponent(new ViewRevenueJPanel(this.business, this.useraccount, this.branch));
     }//GEN-LAST:event_viewRevenueBtnActionPerformed
 
     /**

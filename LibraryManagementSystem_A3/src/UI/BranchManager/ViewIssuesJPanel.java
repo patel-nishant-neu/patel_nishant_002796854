@@ -22,7 +22,7 @@ public class ViewIssuesJPanel extends javax.swing.JPanel {
 
     Business business;
     UserAccount useraccount;
-    Branch branch;
+    String branch;
     DefaultTableModel tableModel1;
     /**
      * Creates new form ViewMaterialsJPanel
@@ -31,12 +31,14 @@ public class ViewIssuesJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public ViewIssuesJPanel(Business business, UserAccount useraccount) {
+    public ViewIssuesJPanel(Business business, UserAccount useraccount, String branch) {
         initComponents();
         this.setVisible(true);
         
         this.business = business;
         this.useraccount = useraccount;
+        this.branch = branch;
+        
         this.tableModel1 = (DefaultTableModel) jTable2.getModel();
         
         populateRentalHistory();

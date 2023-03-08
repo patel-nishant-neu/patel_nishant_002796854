@@ -175,14 +175,13 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
     private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
         // TODO add your handling code here:
         UserAccountDirectory ua = this.business.getBranch().getBranchuseraccountDirectory();
-        String branch = (String) showBranches.getSelectedItem();
-        String branchValue = showBranches.getSelectedItem().toString();
         
         if(ua.authenticateUser(fieldusername1.getText(), fieldPassword1.getText(), "Customer") == null) {
             // save the customer obj for user and useraccount credentials
-            UserAccount user = this.business.getBranch().getBranchuseraccountDirectory().createUserAccount(fieldusername1.getText(), fieldPassword1.getText(), "Customer", branchValue);
+            UserAccount user = this.business.getBranch().getBranchuseraccountDirectory().createUserAccount(fieldusername1.getText(), fieldPassword1.getText(), "Customer", null);
             this.business.getBranch().getBranchcustomerdirectory().createCustomer(user.getAccountId(), fieldname1.getText());
             populateTable();
+            
             fieldusername1.setText("");
             fieldPassword1.setText("");
             fieldname1.setText("");

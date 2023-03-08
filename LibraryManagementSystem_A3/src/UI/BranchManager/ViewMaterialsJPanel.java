@@ -22,7 +22,7 @@ public class ViewMaterialsJPanel extends javax.swing.JPanel {
 
     Business business;
     UserAccount useraccount;
-    Branch branch;
+    String branch;
     DefaultTableModel tableModel1;
     DefaultTableModel tableModel2;
     Book selectedBook;
@@ -33,7 +33,7 @@ public class ViewMaterialsJPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public ViewMaterialsJPanel(Business business, UserAccount useraccount) {
+    public ViewMaterialsJPanel(Business business, UserAccount useraccount, String branch) {
         initComponents();
         this.setVisible(true);
         

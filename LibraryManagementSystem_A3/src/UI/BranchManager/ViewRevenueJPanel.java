@@ -17,7 +17,7 @@ public class ViewRevenueJPanel extends javax.swing.JPanel {
 
     Business business;
     UserAccount useraccount;
-    Branch branch;
+    String branch;
     /**
      * Creates new form ViewRevenueJPanel
      */
@@ -25,12 +25,13 @@ public class ViewRevenueJPanel extends javax.swing.JPanel {
         initComponents();
     }
     
-    public ViewRevenueJPanel(Business business, UserAccount useraccount) {
+    public ViewRevenueJPanel(Business business, UserAccount useraccount, String branch) {
         initComponents();
         this.setVisible(true);
         
         this.business = business;
         this.useraccount = useraccount;
+        this.branch = branch;
         
         jLable1.setText(String.valueOf(this.business.getBranch().getLibrary().getTotalRevenue()));
     }

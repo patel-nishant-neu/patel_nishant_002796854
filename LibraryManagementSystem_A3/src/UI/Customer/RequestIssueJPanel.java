@@ -194,7 +194,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
 
         }
         
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         
         if(c.getCustomerRentalList().size() > 0){
             for(RentRequest r : c.getCustomerRentalList()){
@@ -256,10 +256,10 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         System.out.println("\nBOOOK BRANHC " + this.business.getBranch().getLibrary().getBranchName());
 
         System.out.println(useraccount.getAccountId());
-        System.out.println(this.business.getCustomerDirectoy().getCustomerlist().size());
+        System.out.println(this.business.getBranch().getBranchcustomerdirectory().getCustomerlist().size());
 
         //        System.out.println(c.getName());
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         // create order
 //        selectedMaterial.setBook(selectedBook);
         
@@ -300,7 +300,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
 //        System.out.println(this.business.getCustomerDirectory().getCustomerlist().size());
 
         //        System.out.println(c.getName());
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         // create order
 //        selectedMaterial.setBook(selectedBook);
         RentRequest r =  this.business.getBranch().getLibrary().getRentalRequestDirectory().requestOrder(c, selectedBook, duration_of_days, materialType);
@@ -312,7 +312,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
 
     private void jBookReturnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBookReturnBtnActionPerformed
         // TODO add your handling code here:
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         int selectedRow = jTable1.getSelectedRow();
 
         this.selectedBook = (Book) jTable1.getValueAt(selectedRow, 0);
@@ -332,7 +332,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
 
     private void jReturnMagBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReturnMagBtnActionPerformed
         // TODO add your handling code here:
-        Customer c = this.business.getCustomerDirectoy().findById(useraccount.getAccountId());
+        Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         int selectedRow = jTable2.getSelectedRow();
 
         this.selectedMag = (Magazine) jTable2.getValueAt(selectedRow, 0);
