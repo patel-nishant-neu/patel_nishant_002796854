@@ -210,16 +210,15 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
 
     public void displayBookIssues(){
                    
-        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentalRequestDirectory();
+        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentRequestDirectory();
         
         
-        if(requests.getOrderlist().size() > 0){
+        if(!requests.getOrderlist().isEmpty()){
             
             tableModel1.setRowCount(0);
             for(RentRequest r : requests.getOrderlist()){
                 if(r.getMaterial().equals("Book")){
                     if(r.getBranch().equals(this.business.getBranch().getLibrary().getBranchName())){
-                        System.out.println("YESSSS" + r.getBranch());
                         Object row[] = new Object[6];
                         row[0] = r;
                         row[1] = r.getOrderId();
@@ -237,13 +236,13 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
                 }            
         }
         else{
-            System.out.println("Empty List");
+            System.out.println("No book requests are found");
         }  
     }
     
     public void displayMagazineIssues(){
                    
-        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentalRequestDirectory();
+        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentRequestDirectory();
         
         if(requests.getOrderlist().size() > 0){
             
@@ -261,7 +260,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
                         tableModel2.addRow(row);                                          
                     }
                         else{
-                        System.out.println("NOOOOO" + r.getBranch());
+                        //System.out.println("No Magazine requests found");
                     }
                 }
             }
@@ -269,7 +268,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
 
         }
         else{
-            System.out.println("Empty List");
+            System.out.println("No Magazine requests found");
         }   
     }
 

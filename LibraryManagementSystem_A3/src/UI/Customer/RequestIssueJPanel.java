@@ -102,7 +102,16 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
             new String [] {
                 "Serial No.", "Material Type", "Publication", "Genre", "Language", "Issue Type", "Registered Date", "Price"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTable2.setToolTipText("");
         jScrollPane1.setViewportView(jTable2);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 850, 240));
@@ -128,7 +137,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 850, 240));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 850, 240));
 
         jBookReturnBtn.setText("Return Book");
         jBookReturnBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -208,7 +217,6 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         
         MagazineCollection md = this.business.getBranch().getLibrary().getMd();
        
-        if(md.getMagazines().size() > 0){
             
             tableModel2.setRowCount(0);
             for(Library lib : this.business.getBranch().getBranches()) {
@@ -229,11 +237,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
                     tableModel2.addRow(row);
                     System.out.println(m.getStatus());
                 }
-            }
-        }
-        else{
-            System.out.println("Empty List");
-        }   
+        }  
     }
     private void jRentMagBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRentMagBtnActionPerformed
         // TODO add your handling code here:
@@ -263,13 +267,13 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         // create order
 //        selectedMaterial.setBook(selectedBook);
         
-        RentRequest r_mag =  this.business.getBranch().getLibrary().getRentalRequestDirectory().requestOrderMag(c, selectedMag, duration_of_days, materialType);
+        RentRequest r_mag =  this.business.getBranch().getLibrary().getRentRequestDirectory().requestOrderMag(c, selectedMag, duration_of_days, materialType);
 
         System.out.println(duration_of_days);
         
         selectedMag.setStatus("PENDING RENTAL APPROVAL");
         
-        System.out.println("Size" + this.business.getBranch().getLibrary().getRentalRequestDirectory().getOrderlist().size());
+        System.out.println("Size" + this.business.getBranch().getLibrary().getRentRequestDirectory().getOrderlist().size());
 
         
 //        populateBooks();
@@ -303,7 +307,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         // create order
 //        selectedMaterial.setBook(selectedBook);
-        RentRequest r =  this.business.getBranch().getLibrary().getRentalRequestDirectory().requestOrder(c, selectedBook, duration_of_days, materialType);
+        RentRequest r =  this.business.getBranch().getLibrary().getRentRequestDirectory().requestOrder(c, selectedBook, duration_of_days, materialType);
         
         selectedBook.setStatus("PENDING RENTAL APPROVAL");
         

@@ -48,14 +48,6 @@ public class Library {
         this.branchName = branchName;
     }
     
-    public RentRequestDirectory getRentalRequestDirectory() {
-        return rentRequestDirectory;
-    }
-
-    public void setRentalRequestDirectory(RentRequestDirectory rentRequestDirectory) {
-        this.rentRequestDirectory = rentRequestDirectory;
-    }
-    
     public EmployeeDirectory getEd() {
         return ed;
     }

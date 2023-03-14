@@ -90,7 +90,7 @@ public class ViewIssuesJPanel extends javax.swing.JPanel {
         BookCollection books = this.business.getBranch().getLibrary().getBooks();
         MagazineCollection md = this.business.getBranch().getLibrary().getMd();
                    
-        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentalRequestDirectory();
+        RentRequestDirectory requests = this.business.getBranch().getLibrary().getRentRequestDirectory();
         
         if(requests.getOrderlist().size() > 0){
             

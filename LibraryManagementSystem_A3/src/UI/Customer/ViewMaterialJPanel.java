@@ -95,7 +95,7 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jViewBookTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 710, 240));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 710, 240));
 
         jViewMagazineTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,7 +123,7 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
                 jRentBtnActionPerformed(evt);
             }
         });
-        add(jRentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 120, -1));
+        add(jRentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 120, -1));
 
         jReturnBtn.setText("Return");
         jReturnBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -131,18 +131,18 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
                 jReturnBtnActionPerformed(evt);
             }
         });
-        add(jReturnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 120, -1));
+        add(jReturnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, 120, -1));
 
         jLabel3.setText("Rent duration");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
-        add(fieldNoOfDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 60, -1));
+        add(fieldNoOfDays, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 60, -1));
 
         totalRentPrice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         totalRentPrice.setText("jLabel2");
         add(totalRentPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 510, -1, -1));
 
         jLabel2.setText("Total Rent Price");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 470, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRentBtnActionPerformed
@@ -162,7 +162,7 @@ public class ViewMaterialJPanel extends javax.swing.JPanel {
             }
         }
         
-        System.out.println("\nBOOOK BRANHC " + this.business.getBranch().getLibrary().getBranchName());        
+        System.out.println("\nBOOOK BRANCH " + this.business.getBranch().getLibrary().getBranchName());        
 
         System.out.println(useraccount.getAccountId());
         System.out.println(this.business.getBranch().getBranchcustomerdirectory().getCustomerlist().size());
