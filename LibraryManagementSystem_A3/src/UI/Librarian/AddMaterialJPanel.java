@@ -285,8 +285,8 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
         for(Library lib : this.business.getBranch().getBranches()){
             if(lib.getBranchName().equals(branch)){
                 this.business.getBranch().setLibrary(lib);
-                for(Author a : lib.getAuthors().getAuthors()) {
-                    jComboBoxAuthor.addItem(a.toString());
+                for(Author a : lib.getAuthors().authors) {
+                    jComboBoxAuthor.addItem(a.getAuthor());
                 }
             }
         }        
@@ -298,7 +298,7 @@ public class AddMaterialJPanel extends javax.swing.JPanel {
             if(lib.getBranchName().equals(branch)){
                 this.business.getBranch().setLibrary(lib);
                 for(Genre g : lib.getGenres().getGenreList()) {
-                    jComboBoxGenre.addItem(String.valueOf(g));
+                    jComboBoxGenre.addItem(g.getGenre());
                 }
                 break;
             }

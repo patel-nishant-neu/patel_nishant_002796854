@@ -35,22 +35,22 @@ public class RentRequest {
         this.material = material;
     }
     
-    public RentRequest(Customer customer, Book book, int duration_of_days, String material) {
+    public RentRequest(Customer customer, Book book, int duration_of_days, String material, String branch) {
         this.customer = customer;
         this.status = "Rented";
         this.count++;
-        
+        this.branch = branch;
         this.orderId = "Rental_NO"+this.count;
         this.book = book;
         this.duration_of_days = duration_of_days;
         this.material = material;
     }
     
-        public RentRequest(Customer customer, Magazine magazine, int duration_of_days, String material) {
+        public RentRequest(Customer customer, Magazine magazine, int duration_of_days, String material, String branch) {
         this.customer = customer;
         this.status = "Available";
         this.count++;
-        
+        this.branch = branch;
         this.orderId = "Rental_NO"+this.count;
         this.magazine = magazine;
         this.duration_of_days = duration_of_days;

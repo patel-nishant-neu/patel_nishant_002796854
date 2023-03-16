@@ -90,21 +90,21 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
                 jBookRentBtnActionPerformed(evt);
             }
         });
-        add(jBookRentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 120, -1));
+        add(jBookRentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 120, -1));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Serial No.", "Material Type", "Publication", "Genre", "Language", "Issue Type", "Registered Date", "Price"
+                "Serial No.", "Material Type", "Publication", "Genre", "Language", "Issue Type", "Registered Date", "Branch", "Status", "Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -114,21 +114,21 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         jTable2.setToolTipText("");
         jScrollPane1.setViewportView(jTable2);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, 850, 240));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 950, 240));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Serial No.", "Material Type", "Name", "Author", "Genre", "Language", "Pages", "Registered Date", "Binding", "Price"
+                "Serial No.", "Material Type", "Name", "Author", "Genre", "Pages", "Language", "Registered Date", "Binding", "Branch", "Status", "Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -137,7 +137,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 120, 850, 240));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 950, 240));
 
         jBookReturnBtn.setText("Return Book");
         jBookReturnBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -145,11 +145,11 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
                 jBookReturnBtnActionPerformed(evt);
             }
         });
-        add(jBookReturnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 120, -1));
+        add(jBookReturnBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 120, -1));
 
         jLabel3.setText("Book rent duration");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
-        add(jNoDaysBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 80, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        add(jNoDaysBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 80, -1));
 
         jReturnMagBtn.setText("Return Magazine");
         jReturnMagBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +157,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
                 jReturnMagBtnActionPerformed(evt);
             }
         });
-        add(jReturnMagBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 550, 120, -1));
+        add(jReturnMagBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 120, -1));
 
         jRentMagBtn.setText("Rent Magazine");
         jRentMagBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -165,14 +165,14 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
                 jRentMagBtnActionPerformed(evt);
             }
         });
-        add(jRentMagBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 520, 120, -1));
+        add(jRentMagBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 120, -1));
 
         jLabel4.setText("Book rent duration");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, -1, -1));
-        add(jNoDaysMag, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 470, 80, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
+        add(jNoDaysMag, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, 80, -1));
 
         jLabel5.setText("Book rent duration");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
     public void populateBooks() {
         
@@ -247,7 +247,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
 
         this.selectedMag = (Magazine) jTable2.getValueAt(selectedRowMag, 0);
         
-        this.selectedBook_branch_mag = (String) jTable2.getValueAt(selectedRowMag, 8);
+        this.selectedBook_branch_mag = (String) jTable2.getValueAt(selectedRowMag, 7);
 
         for(Library lib : this.business.getBranch().getBranches()){
             if(lib.getBranchName().equals(selectedBook_branch_mag)){
@@ -267,7 +267,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         // create order
 //        selectedMaterial.setBook(selectedBook);
         
-        RentRequest r_mag =  this.business.getBranch().getLibrary().getRentRequestDirectory().requestOrderMag(c, selectedMag, duration_of_days, materialType);
+        RentRequest r_mag =  this.business.getBranch().getLibrary().getRentRequestDirectory().requestOrderMag(c, selectedMag, duration_of_days, materialType, selectedBook_branch_mag);
 
         System.out.println(duration_of_days);
         
@@ -285,7 +285,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         int duration_of_days = Integer.parseInt(jNoDaysBook.getText());
         int selectedRow = jTable1.getSelectedRow();
         String materialType = "Book";
-
+        
         this.selectedBook = (Book) jTable1.getValueAt(selectedRow, 0);
         
         this.selectedBook_branch = (String) jTable1.getValueAt(selectedRow, 9);
@@ -307,7 +307,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         Customer c = this.business.getBranch().getBranchcustomerdirectory().findById(useraccount.getAccountId());
         // create order
 //        selectedMaterial.setBook(selectedBook);
-        RentRequest r =  this.business.getBranch().getLibrary().getRentRequestDirectory().requestOrder(c, selectedBook, duration_of_days, materialType);
+        RentRequest r =  this.business.getBranch().getLibrary().getRentRequestDirectory().requestOrder(c, selectedBook, duration_of_days, materialType, selectedBook_branch);
         
         selectedBook.setStatus("PENDING RENTAL APPROVAL");
         
@@ -320,7 +320,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         int selectedRow = jTable1.getSelectedRow();
 
         this.selectedBook = (Book) jTable1.getValueAt(selectedRow, 0);
-        this.selectedBook_branch = (String) jTable1.getValueAt(selectedRow, 4);
+        this.selectedBook_branch = (String) jTable1.getValueAt(selectedRow, 9);
 
         for(Library lib : this.business.getBranch().getBranches()){
             if(lib.getBranchName().equals(selectedBook_branch)){
@@ -340,7 +340,7 @@ public class RequestIssueJPanel extends javax.swing.JPanel {
         int selectedRow = jTable2.getSelectedRow();
 
         this.selectedMag = (Magazine) jTable2.getValueAt(selectedRow, 0);
-        this.selectedBook_branch = (String) jTable2.getValueAt(selectedRow, 4);
+        this.selectedBook_branch = (String) jTable2.getValueAt(selectedRow, 7);
 
         for(Library lib : this.business.getBranch().getBranches()){
             if(lib.getBranchName().equals(selectedBook_branch)){

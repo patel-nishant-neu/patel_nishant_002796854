@@ -40,7 +40,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
         this.useraccount = useraccount;
         this.branch = branch;
         this.tableModel1 = (DefaultTableModel) jBookIssueTable.getModel();
-        this.tableModel1 = (DefaultTableModel) jMagazineIssueTable.getModel();
+        this.tableModel2 = (DefaultTableModel) jMagazineIssueTable.getModel();
         
         for(Library lib : this.business.getBranch().getBranches()){
             if(lib.getBranchName().equals(branch)){
@@ -217,7 +217,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
             
             tableModel1.setRowCount(0);
             for(RentRequest r : requests.getOrderlist()){
-                if(r.getMaterial().equals("Book")){
+                if(r.getMaterial().toString() == "Book"){
                     if(r.getBranch().equals(this.business.getBranch().getLibrary().getBranchName())){
                         Object row[] = new Object[6];
                         row[0] = r;
@@ -248,7 +248,7 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
             
             tableModel2.setRowCount(0);
             for(RentRequest r : requests.getOrderlist()){
-                if(!r.getMaterial().equals("Book")){
+                if(r.getMaterial().toString() == "Magazine"){
                      if(r.getBranch().equals(this.business.getBranch().getLibrary().getBranchName())){                       
                         Object row[] = new Object[6];
                         row[0] = r;
@@ -257,12 +257,13 @@ public class BookIssueRequestJPanel extends javax.swing.JPanel {
                         row[3] = r.getMagazine().getId();
                         row[4] = r.getDuration_of_days();
                         row[5] = r.getMagazine().getStatus();
-                        tableModel2.addRow(row);                                          
+                        tableModel2.addRow(row);   
                     }
                         else{
-                        //System.out.println("No Magazine requests found");
+                        System.out.println("No Magazine requests found");
                     }
                 }
+                System.out.println(r.getMaterial() + "This is what we want BBCCCC");
             }
                 
 

@@ -29,40 +29,53 @@ public class RentRequestDirectory {
     }
     
     // create a new order
-    public RentRequest createOrder(Customer customer, Book  book, int duration, String material) {
-        RentRequest o = new RentRequest(customer, book, duration,material);
+    public RentRequest createOrder(Customer customer, Book  book, int duration, String material, String branch) {
+        RentRequest o = new RentRequest(customer, book, duration,material, branch);
         this.rentalList.add(o);
         return o;
     }
     
-    public RentRequest createOrderMag(Customer customer, Magazine magazine, int duration, String material) {
-        RentRequest o = new RentRequest(customer, magazine, duration, material);
+    public RentRequest createOrderMag(Customer customer, Magazine magazine, int duration, String material, String branch) {
+        RentRequest o = new RentRequest(customer, magazine, duration, material, branch);
         this.rentalList.add(o);
         return o;
     }
     
-    public RentRequest requestOrder(Customer customer, Book  book, int duration, String material) {
+    public RentRequest requestOrder(Customer customer, Book  book, int duration, String material, String branch) {
         
         RentRequest o = new RentRequest();
         o.setCustomer(customer);
         o.setBook(book);
         o.setDuration_of_days(duration);
         o.setMaterial(material);
+        o.setBranch(branch);
         
         this.rentalList.add(o);
         return o;
     }
     
-        public RentRequest requestOrderMag(Customer customer, Magazine  magazine, int duration, String material) {
+        public RentRequest requestOrderMag(Customer customer, Magazine  magazine, int duration, String material, String branch) {
         
         RentRequest o = new RentRequest();
         o.setCustomer(customer);
         o.setMagazine(magazine);
         o.setDuration_of_days(duration);
         o.setMaterial(material);
+        o.setBranch(branch);
         
         this.rentalList.add(o);
 //                System.out.println("Here");
         return o;
+    }
+        
+    public RentRequest findById(Customer c) {
+        for(RentRequest r: this.rentalList) {
+            if(r.getCustomer().getPersonID().equals(c.getPersonID())) {
+                System.out.println(r.getOrderId());
+                return r;
+            }
+        }
+        
+        return null;
     }
 }
